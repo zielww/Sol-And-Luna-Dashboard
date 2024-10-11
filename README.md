@@ -1,16 +1,18 @@
-# ✨ Shimi's Room
+# ✨ Sol & Luna Apparel
 
-Welcome to **Shimi's Room**, my main website that contains various things; my projects, blog, school stuff, etc. you 
-can browse and itll be appreciated if u leave me a letter 😀
+Welcome to **Sol & Luna Apparel**, to be continued...
 
-![home](screenshots/home.png)
+[//]: # (![home]&#40;screenshots/home.png&#41;)
 
 ## 🚀 Demo
 
-Check out the live demo of the project [shimi room](https://shimijallores.me/login).
+Check out the live demo of the project [Sol & Luna Ecommerce](https://solandluna.shop/).
 
 ## 🔥 Features
 ****
-- **Personal Design**: old style, my own taste.
-- **Nostalgic Looks**: reminds u of the old times, the old www.****
-- **Responsiveness**: works for all devices.
+
+[//]: # (- **Personal Design**: old style, my own taste.)
+
+[//]: # (- **Nostalgic Looks**: reminds u of the old times, the old www.****)
+
+[//]: # (- **Responsiveness**: works for all devices.)
