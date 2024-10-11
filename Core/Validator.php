@@ -11,6 +11,6 @@ class Validator {
 
     public static function email($char)
     {
-        return filter_var($char,FILTER_VALIDATE_EMAIL);
+        return (bool) filter_var($char,FILTER_VALIDATE_EMAIL);
     }
 }

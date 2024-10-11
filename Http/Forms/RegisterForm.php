@@ -12,8 +12,8 @@ class RegisterForm extends Form
             $this->errors['body'] = 'password cannot be shorter than 5 characters';
         }
 
-        if (!Validator::string($attributes['username'])) {
-            $this->errors['body'] = 'username cannot be shorter than 5 characters';
+        if (!Validator::string($attributes['email'])) {
+            $this->errors['body'] = 'email cannot be shorter than 5 characters';
         }
     }
 }

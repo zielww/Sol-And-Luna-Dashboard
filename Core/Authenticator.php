@@ -11,13 +11,13 @@ class Authenticator
         $this->db = App::resolve(Database::class);
     }
 
-    public function login_attempt($username, $password): bool
+    public function login_attempt($email, $password): bool
     {
-        $user = $this->db->query("select * from users where username = :username", [':username' => $username])->find();
+        $admin = $this->db->query("select * from users where email = :email", [':email' => $email])->find();
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $this->login($username);
+        if ($admin) {
+            if ($password == $admin['password_hash']) {
+                $this->login($admin);
                 return true;
             }
         }
@@ -25,9 +25,10 @@ class Authenticator
         return false;
     }
 
-    public function login($username)
+    public function login($admin)
     {
-        $_SESSION['user'] = $username;
+
+        $_SESSION['admin'] = $admin;
 
         session_regenerate_id(true);
     }

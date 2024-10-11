@@ -33,6 +33,11 @@ function authorize($condition, $status = Response::FORBIDDEN)
     }
 }
 
+function url_is($url)
+{
+    return $_SERVER['REQUEST_URI'] === $url;
+}
+
 function view($path, $attributes = [])
 {
     extract($attributes);
@@ -49,4 +54,11 @@ function redirect($path)
 function old($key, $default = '')
 {
     return Session::get('old')[$key] ?? $default;
+}
+
+function calculateTotalPrice($price, $quantity) {
+    if ($price < 0 || $quantity < 0) {
+        return "Invalid input"; // Error handling for negative values
+    }
+    return round($price * $quantity, 2);
 }
