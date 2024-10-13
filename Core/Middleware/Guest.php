@@ -6,7 +6,7 @@ class Guest
     public function handle()
     {
         if ($_SESSION['admin'] ?? false) {
-            header('location: /home');
+            header('location: /dashboard');
             exit();
         }
     }

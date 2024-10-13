@@ -33,9 +33,10 @@ function authorize($condition, $status = Response::FORBIDDEN)
     }
 }
 
-function url_is($url)
+function url_is($url, $extra_url = null)
 {
-    return $_SERVER['REQUEST_URI'] === $url;
+    return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $url || parse_url($_SERVER['REQUEST_URI'],
+            PHP_URL_PATH) === $extra_url;
 }
 
 function view($path, $attributes = [])

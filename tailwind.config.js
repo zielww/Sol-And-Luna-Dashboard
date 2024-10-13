@@ -60,6 +60,6 @@ module.exports = {
                 'Noto Color Emoji'
             ]
         }
-    }
+    },
 }
 

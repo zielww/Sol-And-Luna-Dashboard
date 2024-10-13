@@ -43,7 +43,8 @@
                     <div class="flex items-center justify-between mt-4">
                         <button class="px-6 py-2 w-full text-sm font-medium tracking-wide text-white capitalize
                         font-inter
-                        transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        transition-colors duration-300 transform bg-orange-500 rounded-lg hover:bg-orange-700
+                        focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             Sign In
                         </button>
                     </div>

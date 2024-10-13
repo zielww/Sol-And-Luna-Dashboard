@@ -1,1 +1,1 @@
-<div class="p-4 sm:ml-64 bg-[#E4E4E7]">
+<div class="p-4 sm:ml-64 bg-gray-100 sm:flex sm:justify-center">
