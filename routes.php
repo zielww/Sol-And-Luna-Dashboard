@@ -20,3 +20,5 @@ $router->delete('/products', 'products/destroy.php')->only('admin');
 $router->patch('/products', 'products/update.php')->only('admin');
 $router->get('/product', 'products/edit.php')->only('admin');
 
+//Orders
+$router->get('/orders', 'orders/index.php')->only('admin');

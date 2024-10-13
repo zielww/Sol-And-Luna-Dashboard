@@ -5,7 +5,7 @@ require base_path("Http/views/partials/nav.php");
 require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
-<div class="p-4 h-svh sm:w-3/4 rounded-lg dark:border-gray-700 mt-14">
+<div class="p-4 h-svh w-full sm:w-3/4 md:3/4 rounded-lg dark:border-gray-700 mt-14">
 
     <?php require base_path("Http/views/partials/alerts.php") ?>
 

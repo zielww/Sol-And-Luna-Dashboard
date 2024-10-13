@@ -5,14 +5,17 @@ require base_path("Http/views/partials/nav.php");
 require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
-<div class="p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
+<div class="p-4 h-svh w-full sm:w-3/4 md:3/4 rounded-lg dark:border-gray-700 mt-14">
 
 <!--    Error Notification-->
     <?php require base_path("Http/views/partials/alerts.php") ?>
 
     <div class="w-full flex justify-between mb-4">
-        <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Products</h1>
-        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-orange-500 block text-white
+        <div>
+            <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Products</h1>
+            <?php require base_path('Http/views/partials/crumbs.php') ?>
+        </div>
+        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-orange-500 h-12 block text-white
         hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4
         py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
             New product

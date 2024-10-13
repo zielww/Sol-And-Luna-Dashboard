@@ -24,4 +24,4 @@ $orders = $db->query("
 ")->get();
 
 
-require base_path('Http/views/admin.view.php');
+require base_path('Http/views/dashboard.view.php');

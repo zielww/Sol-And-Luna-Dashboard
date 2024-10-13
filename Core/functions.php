@@ -39,6 +39,11 @@ function url_is($url, $extra_url = null)
             PHP_URL_PATH) === $extra_url;
 }
 
+function url($url)
+{
+    return $_SERVER['REQUEST_URI'] === $url;
+}
+
 function view($path, $attributes = [])
 {
     extract($attributes);
