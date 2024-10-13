@@ -6,6 +6,9 @@ require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
 <div class="p-4 h-svh sm:w-3/4 rounded-lg dark:border-gray-700 mt-14">
+
+    <?php require base_path("Http/views/partials/alerts.php") ?>
+
     <div class="w-full flex justify-between mb-4 items-center">
         <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Edit Product
             <span><?= $product['name'] ?? '' ?></span></h1>
@@ -61,7 +64,10 @@ require base_path("Http/views/partials/main.php");
             </div>
         </form>
     </div>
-    <form class="w-full grid gap-4 sm:grid-cols-[78%_20%] sm:mb-2">
+    <form method="POST" action="/products" enctype="multipart/form-data"
+          class="w-full grid gap-4 sm:grid-cols-[78%_20%] sm:mb-2">
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="id" value=<?= $_GET['id'] ?? 0 ?>>
         <div class="relative grid gap-4 sm:grid-cols-2 p-6 bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
@@ -138,13 +144,13 @@ require base_path("Http/views/partials/main.php");
         </div>
 
         <div class="relative p-6 bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="mb-6">
-                <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
+            <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
                 dark:text-white">Images <span class="text-red-500">*</span></label>
-                <div class="flex items-center justify-center w-full">
+            <div class="mb-6  sm:gap-2">
+                <div class="flex items-center h-full justify-center w-full">
                     <label for="dropzone-file"
                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <div class="flex flex-col items-center justify-center h-full pt-5 pb-6">
                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -156,9 +162,21 @@ require base_path("Http/views/partials/main.php");
                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
                                 800x400px)</p>
                         </div>
-                        <input id="dropzone-file" type="file" class="hidden"/>
+                        <input id="dropzone-file" type="file" name="images[]" accept="image/*" multiple class="hidden"/>
                     </label>
                 </div>
+                <?php
+                $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id'], '');
+                if (!empty($images)) {
+                    foreach ($images as $image) {
+                        echo '<img class="w-32 my-4 overflow-auto border border-orange-500 rounded-md" src="' .
+                            "/uploads/{$image['name']}" . '" alt="' . htmlspecialchars
+                            ($image['name']) . '">';
+                    }
+                } else {
+                    echo '<img src="path/to/placeholder.png" alt="No image available">';
+                }
+                ?>
             </div>
         </div>
         <div></div>
@@ -173,7 +191,15 @@ require base_path("Http/views/partials/main.php");
             </button>
         </div>
     </form>
-
+    <script>
+        document.getElementById('dropzone-file').addEventListener('change', function () {
+            const files = this.files;
+            if (files.length > 2) {
+                alert('You can only upload a maximum of 2 images.');
+                this.value = '';
+            }
+        });
+    </script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>

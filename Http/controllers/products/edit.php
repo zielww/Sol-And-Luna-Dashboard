@@ -3,6 +3,10 @@
 use Core\App;
 use Core\Database;
 
+use Core\Session;
+
+$admin = Session::get('admin');
+
 $db = App::resolve(Database::class);
 
 $categories = $db->query("select * from categories")->get();
@@ -19,5 +23,8 @@ $product = current(array_filter($products, fn($product) => $product['product_id'
 
 $product_category = $db->query("SELECT * FROM categories WHERE category_id = :id", ['id' => $product['category_id']])
     ->find();
+
+$error_message = \Core\Session::get('errors') ?? [];
+$success_message = \Core\Session::get('success') ?? '';
 
 require base_path('Http/views/products/edit.php');

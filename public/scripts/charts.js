@@ -50,7 +50,7 @@ const customers = {
     series: [
         {
             name: "New Customers",
-            data: [6500, 6418, 6456, 6526, 6356, 6456],
+            data: [10, 3, 12, 4, 25, 12],
             color: "#FF0000",
         },
     ],

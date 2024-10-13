@@ -6,6 +6,10 @@ require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
 <div class="p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
+
+<!--    Error Notification-->
+    <?php require base_path("Http/views/partials/alerts.php") ?>
+
     <div class="w-full flex justify-between mb-4">
         <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Products</h1>
         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="bg-orange-500 block text-white
@@ -70,7 +74,16 @@ require base_path("Http/views/partials/main.php");
             <?php foreach ($products as $product) : ?>
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars('') ?>
+                        <?php
+                        $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id']);
+                        if (!empty($images)) {
+                            $image = $images[0];
+                            echo '<img class="w-16 h-16 overflow-auto border border-orange-500 rounded-md" src="' . "/uploads/{$image['name']}" . '" alt="' . htmlspecialchars
+                                ($image['name']) . '">';
+                        } else {
+                            echo '<img src="path/to/placeholder.png" alt="No image available">';
+                        }
+                        ?>
                     </td>
                     <td class="px-6 py-4">
                         <?= htmlspecialchars($product['name']) ?>

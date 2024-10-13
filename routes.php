@@ -17,5 +17,6 @@ $router->get('/dashboard', 'dashboard.controller.php')->only('admin');
 $router->get('/products', 'products/index.php')->only('admin');
 $router->post('/products', 'products/create.php')->only('admin');
 $router->delete('/products', 'products/destroy.php')->only('admin');
+$router->patch('/products', 'products/update.php')->only('admin');
 $router->get('/product', 'products/edit.php')->only('admin');
 
