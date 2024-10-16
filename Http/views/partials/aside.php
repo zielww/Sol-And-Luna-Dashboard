@@ -1,7 +1,7 @@
 <?php
 //Get Orders
 use Core\App;
-$orders = App::resolve(\Core\Database::class)->query("
+$items = App::resolve(\Core\Database::class)->query("
     SELECT order_items.*, products.*, orders.created_at, orders.status, orders.user
     FROM order_items
     JOIN products ON order_items.product_id = products.product_id
@@ -47,7 +47,7 @@ $orders = App::resolve(\Core\Database::class)->query("
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap text-sm">Orders</span>
                     <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium
-                    text-primary-orange bg-primary-orange-2 rounded-full dark:bg-blue-900 dark:text-blue-300"><?= isset($orders) ? count($orders) : 3 ?></span>
+                    text-primary-orange bg-primary-orange-2 rounded-full dark:bg-blue-900 dark:text-blue-300"><?= isset($items) ? count($items) : 3 ?></span>
                 </a>
             </li>
             <li>
