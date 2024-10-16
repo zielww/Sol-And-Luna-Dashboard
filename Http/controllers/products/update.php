@@ -14,7 +14,7 @@ $form = CreateProductForm::validate($attributes = [
     'category' => $_POST['category'],
     'visibility' => $_POST['visibility'] ?? 'false',
     'description' => $_POST['description'],
-    'images' => $_FILES['images'],
+    'images' => strlen($_FILES['images']['name'][0]) <= 0 ? null : $_FILES['images'],
     'product_id' => $_POST['id'],
 ]);
 

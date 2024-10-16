@@ -75,18 +75,18 @@ require base_path("Http/views/partials/main.php");
             </thead>
             <tbody>
             <?php foreach ($products as $product) : ?>
+                <?php $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id']) ?>
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <td class="px-6 py-4">
-                        <?php
-                        $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id']);
-                        if (!empty($images)) {
-                            $image = $images[0];
-                            echo '<img class="w-16 h-16 overflow-auto border border-orange-500 rounded-md" src="' . "/uploads/{$image['name']}" . '" alt="' . htmlspecialchars
-                                ($image['name']) . '">';
-                        } else {
-                            echo '<img src="path/to/placeholder.png" alt="No image available">';
-                        }
-                        ?>
+                        <?php if (!empty($images)) :   ?>
+                            <?php foreach ($images as $image) :  ?>
+                                <img class="w-20 h-16 sm:w-16 overflow-auto border border-gray-300 rounded-md"
+                                     src="uploads/<?=
+                                         $image['name'] ?? ''?>" alt="<?= $image['name'] ?? '' ?>">
+                            <?php endforeach;  ?>
+                        <?php else:  ?>
+                            <img src="" alt="No image available">
+                        <?php endif;  ?>
                     </td>
                     <td class="px-6 py-4">
                         <?= htmlspecialchars($product['name']) ?>

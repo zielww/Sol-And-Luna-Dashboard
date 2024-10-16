@@ -29,19 +29,16 @@ class Validator {
     }
 
     public static function image($file): bool {
-        // Check if the file is uploaded without errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
             return false;
         }
 
-        // Validate the MIME type
         $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (!in_array($file['type'], $validMimeTypes)) {
             return false;
         }
 
-        // Validate file size (e.g., limit to 2MB)
-        $maxFileSize = 2 * 1024 * 1024; // 2MB
+        $maxFileSize = 8 * 1024 * 1024;
         if ($file['size'] > $maxFileSize) {
             return false;
         }
@@ -50,16 +47,22 @@ class Validator {
     }
 
     public static function images(array $files): bool {
+        if (empty($files['tmp_name'])) {
+            return false;
+        }
+
         foreach ($files['tmp_name'] as $key => $tmpName) {
-            if (!self::image([
+            $singleFile = [
                 'error' => $files['error'][$key],
                 'type' => $files['type'][$key],
                 'size' => $files['size'][$key],
                 'tmp_name' => $tmpName,
-            ])) {
-                return false; // If any image fails validation, return false
+            ];
+
+            if (!self::image($singleFile)) {
+                return false;
             }
         }
-        return true; // All images are valid
+        return true;
     }
 }

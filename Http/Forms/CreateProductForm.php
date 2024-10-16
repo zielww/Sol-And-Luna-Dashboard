@@ -34,8 +34,10 @@ class CreateProductForm extends Form
             $this->errors['description'] = "description";
         }
 
-        if (!Validator::images($this->attributes['images'])) {
-            $this->errors['images'] = "images";
+        if ($this->attributes['images']) {
+            if (!Validator::images($this->attributes['images'])) {
+                $this->errors['images'] = "images";
+            }
         }
     }
 }

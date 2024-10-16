@@ -5,9 +5,9 @@ use Core\Database;
 use Core\Session;
 
 $admin = Session::get('admin');
-
 $db = App::resolve(Database::class);
 
+//Fetch Categories
 $categories = $db->query("select * from categories")->get();
 
 //Get Products
@@ -18,17 +18,15 @@ $products = $db->query("
     LEFT JOIN product_images pi 
     ON p.product_id = pi.product_id AND pi.is_primary = 1
 ")->get();
-
-
 //Total no. of products
 $total_quantity = array_reduce($products, function ($carry, $product) {
     return $carry + $product['stock_quantity'];
 }, 0);
-
-$total_price = array_reduce($products, function($carry, $item) {
+$total_price = array_reduce($products, function ($carry, $item) {
     return $carry + ($item['stock_quantity'] * floatval($item['price']));
 }, 0);
 
+//Alerts
 $success_message = \Core\Session::get('success') ?? '';
 $error_message = \Core\Session::get('errors') ?? [];
 

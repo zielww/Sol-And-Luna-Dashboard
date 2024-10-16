@@ -79,7 +79,7 @@ require base_path("Http/views/partials/main.php");
             <div class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
                 dark:text-white">Category <span class="text-red-500">*</span></label>
-                <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900
+                <label for="category"></label><select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900
                         text-sm
                         rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <?php foreach ($categories as $category) : ?>
@@ -143,10 +143,10 @@ require base_path("Http/views/partials/main.php");
             <!-- footer -->
         </div>
 
-        <div class="relative p-6 bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative p-6  bg-white rounded-lg shadow dark:bg-gray-700">
             <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
                 dark:text-white">Images <span class="text-red-500">*</span></label>
-            <div class="mb-6  sm:gap-2">
+            <div class="mb-6 grid sm:gap-2">
                 <div class="flex items-center h-full justify-center w-full">
                     <label for="dropzone-file"
                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -162,26 +162,27 @@ require base_path("Http/views/partials/main.php");
                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
                                 800x400px)</p>
                         </div>
-                        <input id="dropzone-file" type="file" name="images[]" accept="image/*" multiple class="hidden"/>
+                        <input id="dropzone-file" type="file" name="images[]" accept="image/*" multiple
+                               class="hidden"/>
                     </label>
                 </div>
-                <?php
-                $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id'], '');
-                if (!empty($images)) {
-                    foreach ($images as $image) {
-                        echo '<img class="w-32 my-4 overflow-auto border border-orange-500 rounded-md" src="' .
-                            "/uploads/{$image['name']}" . '" alt="' . htmlspecialchars
-                            ($image['name']) . '">';
-                    }
-                } else {
-                    echo '<img src="path/to/placeholder.png" alt="No image available">';
-                }
-                ?>
+                <div class="grid w-full gap-2 mt-2 sm:grid-cols-3">
+                    <?php if (!empty($images)) :   ?>
+                        <?php foreach ($images as $image) :  ?>
+                            <img class="w-full h-full overflow-auto border border-gray-300 rounded-md"
+                                 src="uploads/<?=
+                                $image['name'] ?? ''?>" alt="<?= $image['name'] ?? '' ?>">
+                        <?php endforeach;  ?>
+                    <?php else:  ?>
+                        <img src="" alt="No image available">
+                    <?php endif;  ?>
+                </div>
             </div>
         </div>
         <div></div>
         <div class="flex items-center space-x-4 mb-4">
-            <button type="submit" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none
+            <button type="submit" id="update" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4
+                    focus:outline-none
             focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Update product
             </button>
@@ -194,8 +195,8 @@ require base_path("Http/views/partials/main.php");
     <script>
         document.getElementById('dropzone-file').addEventListener('change', function () {
             const files = this.files;
-            if (files.length > 2) {
-                alert('You can only upload a maximum of 2 images.');
+            if (files.length > 3) {
+                alert('You can only upload a maximum of 3 images.');
                 this.value = '';
             }
         });
