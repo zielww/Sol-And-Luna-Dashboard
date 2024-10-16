@@ -22,3 +22,5 @@ $router->get('/product', 'products/edit.php')->only('admin');
 
 //Orders
 $router->get('/orders', 'orders/index.php')->only('admin');
+$router->patch('/orders', 'orders/update.php')->only('admin');
+$router->get('/order', 'orders/show.php')->only('admin');

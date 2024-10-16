@@ -3,11 +3,10 @@
 namespace Core\Middleware;
 class Admin
 {
-    public function handle()
+    public function handle(): void
     {
         if (! $_SESSION['admin'] ?? false) {
-            header('location: /login');
-            exit();
+            redirect('/login');
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Http\Forms;
 
 use Core\Validator;
 
-class CreateProductForm extends Form
+class ProductForm extends Form
 {
     public function __construct($attributes)
     {

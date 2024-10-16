@@ -10,7 +10,7 @@ require base_path("Http/views/partials/main.php");
     <?php require base_path("Http/views/partials/alerts.php") ?>
 
     <div class="w-full flex justify-between mb-4 items-center">
-        <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Edit Product
+        <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Edit
             <span><?= $product['name'] ?? '' ?></span></h1>
         <form action="/products" method="POST">
             <input type="hidden" name="_method" value="DELETE">

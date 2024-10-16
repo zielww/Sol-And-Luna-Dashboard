@@ -5,7 +5,7 @@ require base_path("Http/views/partials/nav.php");
 require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
-<div class="w-full sm:w-3/4 md:3/4 p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
+<div class="w-full p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
 <!--    Error Notification-->
     <?php require base_path("Http/views/partials/alerts.php") ?>
 
@@ -281,7 +281,7 @@ require base_path("Http/views/partials/main.php");
                             ?>
                         </td>
                         <td class="px-6 py-4">
-                            <a href="/orders?id=<?= htmlspecialchars($order['order_item_id']) ?>" class="font-medium
+                            <a href="/order?id=<?= htmlspecialchars($order['order_item_id']) ?>" class="font-medium
                                 text-primary-orange
                                 dark:text-blue-500
                                 hover:underline">Open</a>

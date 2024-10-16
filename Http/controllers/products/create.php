@@ -3,11 +3,11 @@
 use Core\App;
 use Core\Database;
 use Core\Repository\Products;
-use Http\Forms\CreateProductForm;
+use Http\Forms\ProductForm;
 
 $db = App::resolve(Database::class);
 
-$form = CreateProductForm::validate($attributes = [
+$form = ProductForm::validate($attributes = [
     'name' => $_POST['name'],
     'price' => $_POST['price'],
     'quantity' => $_POST['quantity'],
