@@ -8,8 +8,6 @@ use Http\Forms\OrderForm;
 
 $admin = Session::get('admin');
 
-dd($_POST);
-
 $db = App::resolve(Database::class);
 
 $form = OrderForm::validate($attributes = [
