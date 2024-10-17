@@ -7,3 +7,22 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.status_indicator {
+    @apply flex items-center gap-2 font-semibold cursor-pointer max-w-fit text-sm border rounded-md py-2 px-3;
+}
+.status_indicator svg {
+    @apply w-5 h-5;
+}
+.status_selected {
+    @apply bg-orange-500 text-white border-orange-500;
+}
+.status_selected svg path {
+    @apply fill-current;
+}
+.status_not_selected {
+    @apply bg-white border-gray-300 hover:bg-gray-200 hover:border-gray-500;
+}
+.status_not_selected svg path {
+    @apply fill-gray-500;
+}
