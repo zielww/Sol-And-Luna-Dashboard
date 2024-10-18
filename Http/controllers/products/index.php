@@ -8,7 +8,7 @@ $admin = Session::get('admin');
 $db = App::resolve(Database::class);
 
 //Fetch Categories
-$categories = $db->query("select * from categories")->get();
+$categories = $db->query("select * from categories where visibility = :visible", ['visible' => '1'])->get();
 
 //Get Products
 $products = $db->query("

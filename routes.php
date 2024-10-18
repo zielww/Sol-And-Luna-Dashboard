@@ -32,3 +32,6 @@ $router->delete('/categories', 'categories/destroy.php')->only('admin');
 $router->patch('/categories', 'categories/update.php')->only('admin');
 $router->get('/category', 'categories/edit.php')->only('admin');
 
+//Customers
+$router->get('/customers', 'customers/index.php')->only('admin');
+$router->post('/customers', 'customers/create.php')->only('admin');

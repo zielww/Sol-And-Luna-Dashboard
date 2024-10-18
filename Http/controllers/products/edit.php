@@ -13,7 +13,7 @@ if (!$_GET['id']) {
 }
 
 //Fetch Categories
-$categories = $db->query("select * from categories")->get();
+$categories = $db->query("select * from categories where visibility = :visible", ['visible' => '1'])->get();
 
 //Fetch products
 $products = $db->query("

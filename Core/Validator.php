@@ -28,6 +28,11 @@ class Validator {
         return true;
     }
 
+    public static function phone(string $phone) : bool
+    {
+        return preg_match('/^(09\d{9}|(0[2-8]\d{7}))$/', $phone);
+    }
+
     public static function image($file): bool {
         if ($file['error'] !== UPLOAD_ERR_OK) {
             return false;
