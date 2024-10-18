@@ -25,7 +25,7 @@ require base_path("Http/views/partials/main.php");
         <div class="block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100
         dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-sm tracking-tight text-gray-600 dark:text-white">Orders</h5>
-            <p class="text-gray-900 dark:text-gray-900 font-bold text-5xl"><?= count($orders) ?></p>
+            <p class="text-gray-900 dark:text-gray-900 font-bold text-5xl"><?= count($orders) ?? 5 ?></p>
         </div>
 
         <div class="block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">

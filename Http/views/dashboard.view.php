@@ -16,14 +16,14 @@ require "partials/aside.php";
                          alt="Bordered avatar">
                     <div class="flex flex-col sm:hidden">
                         <h1 class="font-bold font-sans text-xs">Welcome</h1>
-                        <p class="text-xs font-sans text-gray-600"><?= $admin['first_name'] . ' ' .
-                            $admin['last_name'] ?? '' ?></p>
+                        <p class="text-xs font-sans text-gray-600"><?= htmlspecialchars($admin['first_name'] . ' ' .
+                            $admin['last_name'] ?? '') ?></p>
                     </div>
                     <div class="hidden sm:w-[95%] sm:flex sm:justify-between">
                         <div class="flex flex-col">
                             <h1 class="font-bold font-sans">Welcome</h1>
-                            <p class="text-sm font-sans text-gray-600"><?= $admin['first_name'] . ' ' .
-                                $admin['last_name'] ?? '' ?></p>
+                            <p class="text-sm font-sans text-gray-600"><?= htmlspecialchars($admin['first_name'] . ' ' .
+                                $admin['last_name'] ?? '') ?></p>
                         </div>
                         <form action="/logout" method="POST">
                             <input type="hidden" name="_method" value="DELETE">

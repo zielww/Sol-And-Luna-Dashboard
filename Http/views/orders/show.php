@@ -22,7 +22,7 @@ require base_path("Http/views/partials/main.php");
           class="w-full grid gap-4 sm:grid-cols-[78%_20%] sm:mb-2">
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="id" value=<?= $_GET['id'] ?? 0 ?>>
-        <input type="hidden" name="order_id" value=<?= $order['order_id'] ?? 0 ?>>
+        <input type="hidden" name="order_id" value=<?= htmlspecialchars($order['order_id'] ?? 0) ?>>
         <div class="relative grid gap-2 sm:grid-cols-2 p-4 bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="mb-4">
                 <label for="default-input" class="block mb-2 text-sm text-gray-900
@@ -163,7 +163,7 @@ require base_path("Http/views/partials/main.php");
                         text-gray-900 h-40
                          rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
                         dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly><?= $order['notes'] ?? ''
+                        dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly><?= htmlspecialchars($order['notes'] ?? '')
                     ?></textarea>
             </div>
         </div>
@@ -173,11 +173,11 @@ require base_path("Http/views/partials/main.php");
         dark:bg-gray-700">
             <div class="w-full mb-2">
                 <h1 class="font-sans text-sm font-semibold mb-2">Created at</h1>
-                <p class="text-sm"><?= $order['created_at'] ?? '' ?></p>
+                <p class="text-sm"><?= htmlspecialchars($order['created_at'] ?? '') ?></p>
             </div>
             <div class="w-full">
                 <h1 class="font-sans text-sm font-semibold mb-2">Last modified at</h1>
-                <p class="text-sm"><?= $order['created_at'] ?? '' ?></p>
+                <p class="text-sm"><?= htmlspecialchars($order['created_at'] ?? '') ?></p>
             </div>
         </div>
 

@@ -24,3 +24,11 @@ $router->get('/product', 'products/edit.php')->only('admin');
 $router->get('/orders', 'orders/index.php')->only('admin');
 $router->patch('/orders', 'orders/update.php')->only('admin');
 $router->get('/order', 'orders/show.php')->only('admin');
+
+//Categories
+$router->get('/categories', 'categories/index.php')->only('admin');
+$router->post('/categories', 'categories/create.php')->only('admin');
+$router->delete('/categories', 'categories/destroy.php')->only('admin');
+$router->patch('/categories', 'categories/update.php')->only('admin');
+$router->get('/category', 'categories/edit.php')->only('admin');
+

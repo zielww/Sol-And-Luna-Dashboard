@@ -52,10 +52,10 @@ $items = App::resolve(\Core\Database::class)->query("
             </li>
             <li>
                 <a href="/categories"
-                   class="flex items-center p-2  rounded-lg dark:text-white <?= url_is('/categories') ? "bg-gray-100 text-primary-orange dark:bg-gray-700 group" : "text-gray-900" ?> ">
+                   class="flex items-center p-2  rounded-lg dark:text-white <?= url_is('/categories','/category') ? "bg-gray-100 text-primary-orange dark:bg-gray-700 group" : "text-gray-900" ?> ">
                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.068 3H5.75C5.15326 3 4.58097 3.23705 4.15901 3.65901C3.73705 4.08097 3.5 4.65326 3.5 5.25V9.568C3.5 10.165 3.737 10.738 4.159 11.159L13.74 20.74C14.439 21.439 15.52 21.612 16.347 21.07C18.4286 19.7066 20.2066 17.9286 21.57 15.847C22.112 15.02 21.939 13.939 21.24 13.24L11.66 3.66C11.451 3.45077 11.2029 3.28478 10.9297 3.17154C10.6565 3.05829 10.3637 3 10.068 3Z"
-                              stroke="<?= url_is('/categories') ? "#D97706" : "#A1A1AA" ?>" stroke-width="1.5"
+                              stroke="<?= url_is('/categories', '/category') ? "#D97706" : "#A1A1AA" ?>" stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M6.5 6H6.508V6.008H6.5V6Z" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round"/>

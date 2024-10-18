@@ -11,7 +11,7 @@ require base_path("Http/views/partials/main.php");
 
     <div class="w-full flex justify-between mb-4 items-center">
         <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl">Edit
-            <span><?= $product['name'] ?? '' ?></span></h1>
+            <span><?= htmlspecialchars($product['name'] ?? '') ?></span></h1>
         <form action="/products" method="POST">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="id" value="<?= $_GET['id'] ?? '' ?>">
@@ -84,9 +84,9 @@ require base_path("Http/views/partials/main.php");
                         rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <?php foreach ($categories as $category) : ?>
                         <?php if ($category['name'] === $product_category['name']) : ?>
-                            <option selected value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                            <option selected value="<?= htmlspecialchars($category['name']) ?>"><?= htmlspecialchars($category['name']) ?></option>
                         <?php else: ?>
-                            <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                            <option value="<?= htmlspecialchars($category['name']) ?>"><?= htmlspecialchars($category['name']) ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
@@ -134,7 +134,7 @@ require base_path("Http/views/partials/main.php");
                     $product['visibility'] == 1 ?
                         'checked' : ''
                     ?>>
-                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-orange-500"></div>
                     <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Visible</span>
                 </label>
                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">This product will be hidden from all sales
@@ -171,7 +171,7 @@ require base_path("Http/views/partials/main.php");
                         <?php foreach ($images as $image) :  ?>
                             <img class="w-full h-full overflow-auto border border-gray-300 rounded-md"
                                  src="uploads/<?=
-                                $image['name'] ?? ''?>" alt="<?= $image['name'] ?? '' ?>">
+                                htmlspecialchars($image['name'] ?? '')?>" alt="<?= htmlspecialchars($image['name'] ?? '') ?>">
                         <?php endforeach;  ?>
                     <?php else:  ?>
                         <img src="" alt="No image available">
