@@ -19,32 +19,32 @@
             <form method="POST" action="/products" enctype="multipart/form-data" class="p-4 md:p-5">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name<span class="text-red-500">*</span></label>
+                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price<span class="text-red-500">*</span></label>
+                        <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900
-                        dark:text-white">Quantity</label>
+                        dark:text-white">Quantity<span class="text-red-500">*</span></label>
                         <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300
-                        text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="0" required="">
+                        text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category<span class="text-red-500">*</span></label>
                         <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900
                         text-sm
                         rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <?php foreach($categories as $category) : ?>
-                                <option selected value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                                <option selected value="<?= $category['name'] ?>"><?= ucfirst($category['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="visibility" class="block mb-2 text-sm font-medium text-gray-900
-                        dark:text-white">Visibility</label>
+                        dark:text-white">Visibility<span class="text-red-500">*</span></label>
                         <select id="visibility" name="visibility" class="bg-gray-50 border border-gray-300
                         text-gray-900 text-sm
                         rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -53,13 +53,13 @@
                         </select>
                     </div>
                     <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description</label>
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description<span class="text-red-500">*</span></label>
                         <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm
                         text-gray-900
                         bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>
                     </div>
                     <div class="col-span-2">
-                        <label for="images" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
+                        <label for="images" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images<span class="text-red-500">*</span></label>
                         <input type="file" id="images" name="images[]" accept="image/*" multiple class="block w-full
                         text-sm
                         text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
