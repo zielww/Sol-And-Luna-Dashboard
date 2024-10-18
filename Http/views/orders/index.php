@@ -281,7 +281,7 @@ require base_path("Http/views/partials/main.php");
                             ?>
                         </td>
                         <td class="px-6 py-4">
-                            <a href="/order?id=<?= htmlspecialchars($order['order_item_id']) ?>" class="font-medium
+                            <a href="/order?id=<?= htmlspecialchars($order['order_id']) ?>" class="font-medium
                                 text-primary-orange
                                 dark:text-blue-500
                                 hover:underline">Open</a>

@@ -28,7 +28,7 @@ require base_path("Http/views/partials/main.php");
                 <label for="default-input" class="block mb-2 text-sm text-gray-900
                 dark:text-white font-semibold">Order Code<span class="text-red-500">*</span></label>
                 <input type="text" id="default-input" name="id"
-                       value="<?= htmlspecialchars($order['order_item_id'] ?? '') ?>"
+                       value="<?= htmlspecialchars($order['order_id'] ?? '') ?>"
                        class="opacity-90 bg-gray-100  border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -195,40 +195,44 @@ require base_path("Http/views/partials/main.php");
 
         <div></div>
 
-        <div class="relative grid gap-2 p-4 w-full sm:grid-cols-[50%_22%_22%] bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative grid gap-2 p-4 w-full bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex col-span-3 items-center w-full justify-between pb-4 mb-4 border-b rounded-t
             dark:border-gray-600">
                 <h3 class="text-lg font-semibold w-full text-gray-900 dark:text-white">
                     Order items
                 </h3>
             </div>
-            <div class="mb-4">
-                <label for="name" class="block mb-2 text-sm text-gray-900
-                dark:text-white font-semibold">Product<span class="text-red-500">*</span></label>
-                <input type="text" id="name" name="name" readonly
-                       value="<?= htmlspecialchars($order['name'] ?? '') ?>"
-                       class="  border border-gray-300 text-gray-900 text-sm rounded-lg
-                       focus:ring-blue-500
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-            <div class="mb-4">
-                <label for="quantity" class="block mb-2 text-sm text-gray-900
-                dark:text-white font-semibold">Quantity<span class="text-red-500">*</span></label>
-                <input type="text" id="quantity" name="quantity" readonly
-                       value="<?= htmlspecialchars($order['quantity'] ?? '') ?>"
-                       class="  border border-gray-300 text-gray-900 text-sm rounded-lg
-                       focus:ring-blue-500
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-            <div class="mb-4">
-                <label for="price" class="block mb-2 text-sm text-gray-900
-                dark:text-white font-semibold">Unit Price<span class="text-red-500">*</span></label>
-                <input type="text" id="price" name="price" readonly
-                       value="<?= htmlspecialchars($order['price_at_time'] ?? '') ?>"
-                       class="  border border-gray-300 text-gray-900 text-sm rounded-lg
-                       focus:ring-blue-500
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
+            <?php foreach ($orders as $order) : ?>
+                <div class="w-full col-span-3 gap-2 grid sm:grid-cols-[50%_22%_22%] border border-gray-200 rounded-md py-4 items-center justify-center">
+                    <div class="mb-4">
+                        <label for="name" class="block mb-2 text-sm text-gray-900
+                    dark:text-white font-semibold">Product<span class="text-red-500">*</span></label>
+                        <input type="text" id="name" name="name" readonly
+                               value="<?= htmlspecialchars($order['name'] ?? '') ?>"
+                               class="  border border-gray-300 text-gray-900 text-sm rounded-lg
+                           focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="quantity" class="block mb-2 text-sm text-gray-900
+                    dark:text-white font-semibold">Quantity<span class="text-red-500">*</span></label>
+                        <input type="text" id="quantity" name="quantity" readonly
+                               value="<?= htmlspecialchars($order['quantity'] ?? '') ?>"
+                               class="  border border-gray-300 text-gray-900 text-sm rounded-lg
+                           focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="price" class="block mb-2 text-sm text-gray-900
+                    dark:text-white font-semibold">Unit Price<span class="text-red-500">*</span></label>
+                        <input type="text" id="price" name="price" readonly
+                               value="<?= htmlspecialchars($order['price_at_time'] ?? '') ?>"
+                               class="  border border-gray-300 text-gray-900 text-sm rounded-lg
+                           focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
 
         <div></div>
