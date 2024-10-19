@@ -5,10 +5,10 @@ require base_path("Http/views/partials/nav.php");
 require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
-<div class="w-full sm:w-3/4 md:3/4 p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
+<div class="w-full p-4 h-svh rounded-lg dark:border-gray-700 mt-14">
     <div class="w-full flex justify-between mb-4">
         <div>
-            <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl"><?= $customer_name ?? 'Guest' ?></h1>
+            <h1 class="font-sans font-bold mb-4 text-2xl sm:text-3xl"><?= htmlspecialchars(ucfirst(explode('@', $order['email'])[0])) . ' ' . 'Order' ?? 'Guest' ?></h1>
             <?php require base_path('Http/views/partials/crumbs.php') ?>
         </div>
         <button class="bg-orange-500 block text-white
@@ -35,9 +35,9 @@ require base_path("Http/views/partials/main.php");
             </div>
             <div class="mb-4">
                 <label for="user" class="block mb-2 text-sm text-gray-900
-                dark:text-white font-semibold">Customer Name<span class="text-red-500">*</span></label>
+                dark:text-white font-semibold">Customer Email<span class="text-red-500">*</span></label>
                 <input type="text" id="user" name="user" readonly
-                       value="<?= htmlspecialchars($order['user'] ?? '') ?>"
+                       value="<?= htmlspecialchars($order['email'] ?? '') ?>"
                        class=" border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -123,7 +123,7 @@ require base_path("Http/views/partials/main.php");
                 <label for="street" class="block mb-2 text-sm text-gray-900
                 dark:text-white font-semibold">Street Address<span class="text-red-500">*</span></label>
                 <input type="text" id="street" name="street" readonly
-                       value="<?= htmlspecialchars($order['street_address'] ?? '') ?>"
+                       value="<?= htmlspecialchars($shipping_address['street_address'] ?? '') ?>"
                        class="  border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -133,7 +133,7 @@ require base_path("Http/views/partials/main.php");
                     <label for="city" class="block mb-2 text-sm text-gray-900
                 dark:text-white font-semibold">City<span class="text-red-500">*</span></label>
                     <input type="text" id="city" name="city" readonly
-                           value="<?= htmlspecialchars($order['city'] ?? '') ?>"
+                           value="<?= htmlspecialchars($shipping_address['city'] ?? '') ?>"
                            class="  border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -142,7 +142,7 @@ require base_path("Http/views/partials/main.php");
                     <label for="province" class="block mb-2 text-sm text-gray-900
                 dark:text-white font-semibold">State / Province<span class="text-red-500">*</span></label>
                     <input type="text" id="province" name="province" readonly
-                           value="<?= htmlspecialchars($order['province'] ?? '') ?>"
+                           value="<?= htmlspecialchars($shipping_address['province'] ?? '') ?>"
                            class="  border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -151,7 +151,7 @@ require base_path("Http/views/partials/main.php");
                     <label for="zip" class="block mb-2 text-sm text-gray-900
                 dark:text-white font-semibold">Zip Code<span class="text-red-500">*</span></label>
                     <input type="text" id="zip" name="zip" readonly
-                           value="<?= htmlspecialchars($order['zip_code'] ?? '') ?>"
+                           value="<?= htmlspecialchars($shipping_address['zip_code'] ?? '') ?>"
                            class="  border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

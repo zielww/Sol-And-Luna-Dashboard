@@ -23,6 +23,25 @@ class Customers
         Session::flash('success', 'Customer added successfully!');
     }
 
+    public function delete(string|int $customer_id): void
+    {
+        $this->delete_previous_image($customer_id);
+        $this->db->query('delete from users where user_id = :customer_id', ['customer_id' => $customer_id]);
+        Session::flash('success', 'Customer removed successfully!');
+    }
+
+    public function update(array $attributes): void
+    {
+        $this->update_customer($attributes);
+
+        if (!empty($attributes['image']['name'])) {
+            $this->delete_previous_image($attributes['user_id']);
+            $this->upload_image($attributes['user_id']);
+        }
+
+        Session::flash('success', 'Information updated successfully!');
+    }
+
     private function insert_customer(array $attributes): int
     {
         $this->db->query("INSERT INTO users (email, first_name, last_name, password_hash, phone, country, user_type) 
@@ -38,6 +57,19 @@ class Customers
 
         $customer = $this->db->query("SELECT * FROM users ORDER BY user_id DESC LIMIT 1")->find();
         return $customer['user_id'];
+    }
+
+    private function update_customer(array $attributes): void
+    {
+        $this->db->query("UPDATE users SET email = :email, first_name = :first_name, last_name = :last_name, phone = :phone, country = :country, user_type = :user_type WHERE user_id = :user_id", [
+            'email' => $attributes['email'],
+            'first_name' => $attributes['first_name'],
+            'last_name' => $attributes['last_name'],
+            'phone' => $attributes['phone'],
+            'country' => $attributes['country'],
+            'user_type' => 'customer',
+            'user_id' => $attributes['user_id']
+        ]);
     }
 
     private function get_upload_directory(): string
@@ -75,10 +107,21 @@ class Customers
         ]);
     }
 
+    private function delete_previous_image(string|int $customer_id): void
+    {
+        $image_url = $this->db->query('select image_url from user_images where user_id = :customer_id', ['customer_id' => $customer_id])->find();
+        if (file_exists($image_url['image_url'])) {
+            unlink($image_url['image_url']);
+        }
+        $this->db->query('delete from user_images  where user_id = :customer_id', ['customer_id' => $customer_id]);
+    }
+
     public function get_customer_image(int $customer_id): array
     {
-        $query = "SELECT * FROM user_images WHERE customer_id = :customer_id";
+        $query = "SELECT * FROM user_images WHERE user_id = :customer_id";
 
-        return $this->db->query($query, ['customer_id' => $customer_id])->get();
+        $result = $this->db->query($query, ['customer_id' => $customer_id])->find();
+
+        return $result ?: [];
     }
 }

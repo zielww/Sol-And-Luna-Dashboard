@@ -136,9 +136,9 @@ require base_path("Http/views/partials/main.php");
             </thead>
             <tbody>
             <?php foreach ($products as $product) : ?>
-                <?php $images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id']) ?>
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <td class="px-6 py-4">
+                        <?php $images = (new Core\Repository\Products())->get_product_images((int)$product['product_id']); ?>
                         <?php if (!empty($images)) :   ?>
                             <?php foreach ($images as $image) :  ?>
                                 <img class="w-20 h-16 sm:w-16 overflow-auto border border-gray-300 rounded-md"

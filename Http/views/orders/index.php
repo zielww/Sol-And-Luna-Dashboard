@@ -201,7 +201,7 @@ require base_path("Http/views/partials/main.php");
                             ?>
                         </th>
                         <td class="px-6 py-4">
-                            <?= htmlspecialchars($order['user']) ?>
+                            <?= htmlspecialchars($order['email']) ?>
                         </td>
                         <td class="px-6 py-4">
                             <?= htmlspecialchars($order['name']) ?>

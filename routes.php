@@ -34,4 +34,13 @@ $router->get('/category', 'categories/edit.php')->only('admin');
 
 //Customers
 $router->get('/customers', 'customers/index.php')->only('admin');
+$router->get('/customer', 'customers/edit.php')->only('admin');
 $router->post('/customers', 'customers/create.php')->only('admin');
+$router->patch('/customers', 'customers/update.php')->only('admin');
+$router->delete('/customers', 'customers/destroy.php')->only('admin');
+
+//Addresses
+$router->get('/address', 'customers/addresses/edit.php')->only('admin');
+$router->post('/addresses', 'customers/addresses/create.php')->only('admin');
+$router->patch('/addresses', 'customers/addresses/update.php')->only('admin');
+$router->delete('/addresses', 'customers/addresses/destroy.php')->only('admin');

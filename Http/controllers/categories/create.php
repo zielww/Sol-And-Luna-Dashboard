@@ -1,17 +1,18 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Authenticator\CategoryAuth;
 use Core\Repository\Categories;
 use Http\Forms\CategoryForm;
 
-$db = App::resolve(Database::class);
-
 $form = CategoryForm::validate($attributes = [
-    'name' => $_POST['name'],
+    'name' => strtolower($_POST['name']),
     'visibility' => $_POST['visibility'],
     'description' => $_POST['description'],
 ]);
+
+if ((new CategoryAuth())->attempt($attributes['name'])) {
+    $form->error('body', 'name')->throw();
+}
 
 (new Categories())->store($attributes);
 

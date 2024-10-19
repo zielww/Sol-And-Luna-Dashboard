@@ -2,7 +2,7 @@
 
 use Core\App;
 use Core\Database;
-
+use Core\Repository\Products;
 use Core\Session;
 
 $admin = Session::get('admin');
@@ -27,10 +27,10 @@ $product = current(array_filter($products, fn($product) => $product['product_id'
 $product_category = $db->query("SELECT * FROM categories WHERE category_id = :id", ['id' => $product['category_id']])->find();
 
 //Fetch images
-$images = (new \Core\Repository\Products())->getProductImages((int)$product['product_id'], false);
+$images = (new Products())->get_product_images((int)$product['product_id'], false);
 
 //Get Error Session
-$error_message = \Core\Session::get('errors') ?? [];
-$success_message = \Core\Session::get('success') ?? '';
+$error_message = Session::get('errors') ?? [];
+$success_message = Session::get('success') ?? '';
 
 require base_path('Http/views/products/edit.php');

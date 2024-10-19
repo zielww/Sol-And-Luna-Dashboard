@@ -1,11 +1,7 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\Repository\Products;
 use Http\Forms\ProductForm;
-
-$db = App::resolve(Database::class);
 
 $form = ProductForm::validate($attributes = [
     'name' => $_POST['name'],

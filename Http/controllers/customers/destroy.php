@@ -1,11 +1,7 @@
 <?php
 
-use Core\App;
-use Core\Database;
-use Core\Repository\Categories;
+use Core\Repository\Customers;
 
-$db = App::resolve(Database::class);
+(new Customers())->delete($_POST['id']);
 
-(new Categories())->delete($_POST['id']);
-
-redirect('/categories');
+redirect('/customers');

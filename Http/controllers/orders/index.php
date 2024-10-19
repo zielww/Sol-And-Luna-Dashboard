@@ -18,7 +18,7 @@ $status = match ($_GET['sort'] ?? false) {
 };
 
 $query = "
-    SELECT order_items.*, products.*, orders.created_at, orders.status, orders.user
+    SELECT order_items.*, products.*, orders.created_at, orders.status, orders.email
     FROM order_items
     JOIN products ON order_items.product_id = products.product_id
     JOIN orders ON order_items.order_id = orders.order_id
@@ -38,8 +38,8 @@ $total_price = array_reduce($orders, function ($carry, $item) {
     return $carry + ($item['quantity'] * floatval($item['price']));
 }, 0);
 
-$success_message = \Core\Session::get('success') ?? '';
-$error_message = \Core\Session::get('errors') ?? [];
+$success_message = Session::get('success') ?? '';
+$error_message = Session::get('errors') ?? [];
 
 
 require base_path('Http/views/orders/index.php');

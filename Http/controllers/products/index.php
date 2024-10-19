@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\Repository\Products;
 use Core\Session;
 
 $admin = Session::get('admin');
@@ -18,6 +19,7 @@ $products = $db->query("
     LEFT JOIN product_images pi 
     ON p.product_id = pi.product_id AND pi.is_primary = 1
 ")->get();
+
 //Total no. of products
 $total_quantity = array_reduce($products, function ($carry, $product) {
     return $carry + $product['stock_quantity'];
@@ -27,7 +29,7 @@ $total_price = array_reduce($products, function ($carry, $item) {
 }, 0);
 
 //Alerts
-$success_message = \Core\Session::get('success') ?? '';
-$error_message = \Core\Session::get('errors') ?? [];
+$success_message = Session::get('success') ?? '';
+$error_message = Session::get('errors') ?? [];
 
 require base_path('Http/views/products/index.php');

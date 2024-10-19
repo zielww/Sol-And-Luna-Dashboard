@@ -22,8 +22,10 @@ class CustomerForm extends Form
             $this->errors['email'] = "email";
         }
 
-        if (!Validator::string($this->attributes['password'],3,20)) {
-            $this->errors['password'] = "password";
+        if ($this->attributes['password']) {
+            if (!Validator::string($this->attributes['password'],3,20)) {
+                $this->errors['password'] = "password";
+            }
         }
 
         if (!Validator::phone($this->attributes['phone'])) {
@@ -34,7 +36,7 @@ class CustomerForm extends Form
             $this->errors['country'] = "country";
         }
 
-        if ($this->attributes['image']) {
+        if (!empty($this->attributes['image']['tmp_name'])) {
             if (!Validator::image($this->attributes['image'])) {
                 $this->errors['image'] = "image";
             }

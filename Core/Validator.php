@@ -43,7 +43,7 @@ class Validator {
             return false;
         }
 
-        $maxFileSize = 8 * 1024 * 1024;
+        $maxFileSize = 2 * 1024 * 1024;
         if ($file['size'] > $maxFileSize) {
             return false;
         }

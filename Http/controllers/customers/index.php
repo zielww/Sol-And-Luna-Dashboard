@@ -11,7 +11,7 @@ $db = App::resolve(Database::class);
 $customers = $db->query('SELECT * FROM users WHERE user_type = :user_type', ['user_type' => 'customer'])->get();
 
 //Alerts
-$success_message = \Core\Session::get('success') ?? '';
-$error_message = \Core\Session::get('errors') ?? [];
+$success_message = Session::get('success') ?? '';
+$error_message = Session::get('errors') ?? [];
 
 require base_path('Http/views/customers/index.php');

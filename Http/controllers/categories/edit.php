@@ -16,7 +16,7 @@ if (!$_GET['id']) {
 $category = $db->query("select * from categories where category_id = :category_id", ['category_id' => $_GET['id']])->find();
 
 //Get Error Session
-$error_message = \Core\Session::get('errors') ?? [];
-$success_message = \Core\Session::get('success') ?? '';
+$error_message = Session::get('errors') ?? [];
+$success_message = Session::get('success') ?? '';
 
 require base_path('Http/views/categories/edit.php');
