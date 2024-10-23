@@ -2,17 +2,9 @@
 
 use Core\App;
 use Core\Database;
-use Core\Session;
-
-$admin = Session::get('admin');
 
 $db = App::resolve(Database::class);
 
-if (!$_GET['id']) {
-    redirect('/orders');
-}
-
-//Fetch Categories
 $categories = $db->query("select * from categories")->get();
 
 $orders = $db->query("

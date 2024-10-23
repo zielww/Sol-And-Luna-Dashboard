@@ -18,6 +18,8 @@ class Authenticator
         if ($admin) {
             if ($password == $admin['password_hash']) {
                 $this->login($admin);
+
+                Session::flash('success', $admin['first_name']);
                 return true;
             }
         }

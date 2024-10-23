@@ -40,4 +40,12 @@ class Session
         $params = session_get_cookie_params();
         setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
     }
+
+    public static function get_flashed(array $keys = []): array
+    {
+        return array_reduce($keys, function ($carry, $key) {
+            $carry[$key] = Session::get($key, null);
+            return $carry;
+        }, []);
+    }
 }

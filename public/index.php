@@ -34,6 +34,5 @@ try {
     redirect($router->previous_url());
 }
 
-
 Session::unflash();
 

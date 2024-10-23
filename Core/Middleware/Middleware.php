@@ -23,4 +23,15 @@ class Middleware
 
         (new $middleware)->handle();
     }
+
+    public static function handle(string | null $key): void
+    {
+        if (!$key) {
+            return;
+        }
+
+        if (!$_GET['id'] ?? false) {
+            redirect("/$key");
+        }
+    }
 }

@@ -1,3 +1,6 @@
+<?php
+    $admin = Core\Session::get('admin');
+?>
 <!doctype html>
 <html lang="en" class="">
 <head>
@@ -12,5 +15,6 @@
           rel="stylesheet">
     <link rel="icon" href="images/logo.svg" sizes="any" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Sol & Luna</title>
 </head>

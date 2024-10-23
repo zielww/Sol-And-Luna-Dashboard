@@ -1,4 +1,12 @@
-<?php if ($success_message) : ?>
+<?php
+
+use Core\Session;
+
+$messages = Session::get_flashed(['errors', 'success']);
+
+?>
+
+<?php if ($messages['success']) : ?>
     <div id='success'
          class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
@@ -8,11 +16,11 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-            <span class="font-medium">Action Successful! </span><?= $success_message ?? '' ?>
+            <span class="font-medium">Action Successful! </span><?= $messages['success'] ?>
         </div>
     </div>
 <?php endif; ?>
-<?php if ($error_message) : ?>
+<?php if ($messages['errors']) : ?>
     <div id="error" class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800
         dark:text-red-400"
          role="alert">
@@ -22,7 +30,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-            <span class="font-medium">Action Unsuccessful! </span> <?= 'Please enter a valid ' . implode(", ", $error_message) ?? '' ?>
+            <span class="font-medium">Action Unsuccessful! </span> <?= 'Please enter a valid ' . implode(", ", $messages['errors'])?>
         </div>
     </div>
 <?php endif; ?>
