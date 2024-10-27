@@ -81,18 +81,16 @@
                     </svg>
                 </div>
 
-                <div class="flex items-center ms-3">
+                <div x-data="{open:false}" class="relative flex items-center ms-3">
                     <div>
-                        <button type="button"
-                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                                aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button @click="open = !open" x-ref="button" type="button"
+                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full"
                                  src="images/kuromi.jpg" alt="user photo">
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                         id="dropdown-user">
+                    <div x-cloak  x-show="open" @click.away="open=false" x-anchor="$refs.button" x-collapse class="z-50 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <?= $admin['first_name'] . ' ' . $admin['last_name'] ?? '' ?>

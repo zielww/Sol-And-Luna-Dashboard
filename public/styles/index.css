@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+[x-cloak] {
+    display: none;
+}
+
 .status_indicator {
     @apply flex items-center gap-2 font-semibold cursor-pointer max-w-fit text-sm border rounded-md py-2 px-3;
 }
