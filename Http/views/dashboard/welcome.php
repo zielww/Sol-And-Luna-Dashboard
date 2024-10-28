@@ -1,7 +1,8 @@
 <div x-show="isOpen" x-data="{ isOpen: true, currentSection: 1 }"
      class="fixed inset-0 z-50 m-auto w-10/12 overflow-auto flex items-center justify-center">
     <!-- Backdrop -->
-    <div x-cloak x-show="isOpen"
+    <div x-cloak
+         x-show="isOpen"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -13,7 +14,8 @@
     </div>
 
     <!-- Modal -->
-    <div x-cloak x-show="isOpen"
+    <div x-cloak
+         x-show="isOpen"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
          x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"

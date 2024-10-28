@@ -28,34 +28,7 @@ require base_path("Http/views/partials/aside.php");
                             <p class="text-sm font-sans text-gray-600"><?= htmlspecialchars($admin['first_name'] . ' ' .
                                 $admin['last_name'] ?? '') ?></p>
                         </div>
-                        <form x-data="{ isOpen: false}" action="/logout" method="POST">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button @click="isOpen = true" type="button"
-                                    class="text-gray-900 flex items-center bg-white border
-                        border-gray-300
-                        focus:outline-none
-                         hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2
-                         .5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700
-                         dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                <svg fill="#000000" width="23" height="23" viewBox="0 0 24 24" id="sign-out-left-2"
-                                     data-name="Flat Line" xmlns="http://www.w3.org/2000/svg"
-                                     class="icon flat-line mr-2">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <polyline id="primary" points="6 15 3 12 6 9"
-                                                  style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:1.032;"></polyline>
-                                        <line id="primary-2" data-name="primary" x1="3" y1="12" x2="17" y2="12"
-                                              style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:1.032;"></line>
-                                        <path id="primary-3" data-name="primary"
-                                              d="M10,8V5a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H11a1,1,0,0,1-1-1V16"
-                                              style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:1.032;"></path>
-                                    </g>
-                                </svg>
-                                Sign Out
-                            </button>
-                            <?php require base_path("Http/views/dashboard/logout.php") ?>
-                        </form>
+                        <?php require base_path("Http/views/dashboard/logout.php") ?>
                     </div>
                 </div>
                 <div class="flex items-center justify-center sm:justify-between h-24 rounded bg-white

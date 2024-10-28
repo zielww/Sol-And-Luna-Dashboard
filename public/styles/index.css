@@ -9,7 +9,7 @@
 }
 
 [x-cloak] {
-    display: none;
+    display: none !important;
 }
 
 .status_indicator {
