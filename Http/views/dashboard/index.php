@@ -1,116 +1,11 @@
 <?php
-require "partials/head.php";
-require "partials/body.php";
-require "partials/nav.php";
-require "partials/aside.php";
+require base_path("Http/views/partials/head.php");
+require base_path("Http/views/partials/body.php");
+require base_path("Http/views/partials/nav.php");
+require base_path("Http/views/partials/aside.php");
 ?>
 <?php if ($success ?? false) : ?>
-    <div x-show="isOpen" x-data="{ isOpen: true, currentSection: 1 }"
-         class="fixed inset-0 z-50 m-auto w-10/12 overflow-auto flex items-center justify-center">
-        <!-- Backdrop -->
-        <div x-cloak x-show="isOpen"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-             @click="isOpen = false">
-        </div>
-
-        <!-- Modal -->
-        <div x-cloak x-show="isOpen"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-             class="relative bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
-             @click.away="isOpen = false">
-
-            <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <!-- Section 1 -->
-                <div x-show="currentSection === 1">
-                    <img class="object-cover w-full h-48 rounded-md"
-                         src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                         alt="">
-
-                    <div class="mt-4 text-center">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            Welcome back <?= $success ?? '' ?>
-                        </h3>
-                        <p class="mt-2 text-sm text-gray-500">
-                            Welcome to your dashboard. Here, we allow the administrator to manage the state of Sol & Luna Apparel.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Section 2 -->
-                <div x-show="currentSection === 2">
-                    <img class="object-cover w-full h-48 rounded-md"
-                         src="https://images.pexels.com/photos/8872665/pexels-photo-8872665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                         alt="">
-                    <div class="mt-4 text-center">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Discover Our Features
-                        </h3>
-                        <p class="mt-2 text-sm text-gray-500">
-                            In this dashboard, the administrator can oversee the state of products, orders, customers, reports and messages.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Section 3 -->
-                <div x-show="currentSection === 3">
-                    <img class="object-cover w-full h-48 rounded-md"
-                         src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                         alt="">
-                    <div class="mt-4 text-center">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Get Started
-                        </h3>
-                        <p class="mt-2 text-sm text-gray-500">
-                            That's pretty much it, be careful and have fun. <3 <br>
-                            -Shimi & Palo
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Dots -->
-                <div class="flex justify-center mt-4">
-                    <button :class="{ 'bg-orange-500': currentSection === 1, 'bg-gray-200': currentSection !== 1 }"
-                            class="w-2 h-2 mx-1 rounded-full focus:outline-none"
-                            @click="currentSection = 1"></button>
-                    <button :class="{ 'bg-orange-500': currentSection === 2, 'bg-gray-200': currentSection !== 2 }"
-                            class="w-2 h-2 mx-1 rounded-full focus:outline-none"
-                            @click="currentSection = 2"></button>
-                    <button :class="{ 'bg-orange-500': currentSection === 3, 'bg-gray-200': currentSection !== 3 }"
-                            class="w-2 h-2 mx-1 rounded-full focus:outline-none"
-                            @click="currentSection = 3"></button>
-                </div>
-            </div>
-
-            <!-- Actions -->
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button x-show="currentSection < 3"
-                        @click="currentSection++"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-500 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                    Next
-                </button>
-                <button x-show="currentSection === 3"
-                        @click="isOpen = false"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-500 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                    Get Started
-                </button>
-                <button @click="isOpen = false"
-                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                    Skip
-                </button>
-            </div>
-        </div>
-    </div>
+    <?php require base_path("Http/views/dashboard/welcome.php") ?>
 <?php endif; ?>
     <div class="p-4 sm:ml-64 bg-gray-100">
         <div class="p-4 h-full rounded-lg dark:border-gray-700 mt-14">
@@ -133,9 +28,9 @@ require "partials/aside.php";
                             <p class="text-sm font-sans text-gray-600"><?= htmlspecialchars($admin['first_name'] . ' ' .
                                 $admin['last_name'] ?? '') ?></p>
                         </div>
-                        <form action="/logout" method="POST">
+                        <form x-data="{ isOpen: false}" action="/logout" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                            <button @click="isOpen = true" type="button"
                                     class="text-gray-900 flex items-center bg-white border
                         border-gray-300
                         focus:outline-none
@@ -159,45 +54,7 @@ require "partials/aside.php";
                                 </svg>
                                 Sign Out
                             </button>
-                            <div id="popup-modal" tabindex="-1"
-                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <button type="button"
-                                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                data-modal-hide="popup-modal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                 fill="none"
-                                                 viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                        <div class="p-4 md:p-5 text-center">
-                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-                                                 aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      stroke-width="2"
-                                                      d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
-                                                you sure you want to log out?</h3>
-                                            <button data-modal-hide="popup-modal" type="submit"
-                                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                Yes, I'm sure
-                                            </button>
-                                            <button data-modal-hide="popup-modal" type="button"
-                                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                                No, cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php require base_path("Http/views/dashboard/logout.php") ?>
                         </form>
                     </div>
                 </div>
@@ -397,7 +254,8 @@ require "partials/aside.php";
                 </thead>
                 <tbody x-data x-sort>
                 <?php foreach ($orders as $order) : ?>
-                    <tr x-sort:item class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800
+                    <tr x-sort:item class="cursor-pointer odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                    even:dark:bg-gray-800
                     border-b
                     dark:border-gray-700">
                         <th scope="row"
@@ -624,7 +482,6 @@ require "partials/aside.php";
             </table>
         </div>
     </div>
-    </div>
 <?php
-require "partials/footer.php";
+require base_path("Http/views/partials/footer.php");
 ?>

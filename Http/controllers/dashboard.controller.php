@@ -15,4 +15,4 @@ $orders = $db->query("
     LIMIT 5
 ")->get();
 
-require base_path('Http/views/dashboard.view.php');
+require base_path('Http/views/dashboard/index.php');
