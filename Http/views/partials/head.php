@@ -2,7 +2,7 @@
     $admin = Core\Session::get('admin');
 ?>
 <!doctype html>
-<html lang="en" class="">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

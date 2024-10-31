@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
           rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>Log In</title>
+    <title>Sol & Luna</title>
 </head>
 <body class="dark:bg-dark-background w-full h-svh flex items-center justify-center">
 <form x-data="{isVisible:false}" method="POST" action="/login" class="min-h-screen w-full flex flex-col

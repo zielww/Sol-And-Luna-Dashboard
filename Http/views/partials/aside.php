@@ -8,6 +8,8 @@ $items = App::resolve(Database::class)->query("
     FROM order_items
     JOIN products ON order_items.product_id = products.product_id
     JOIN orders ON order_items.order_id = orders.order_id
+    WHERE orders.status != 'delivered' 
+    AND orders.status != 'cancelled'
 ")->get();
 ?>
 

@@ -44,3 +44,10 @@ $router->get('/address', 'customers/addresses/edit.php')->only('admin')->params(
 $router->post('/addresses', 'customers/addresses/create.php')->only('admin');
 $router->patch('/addresses', 'customers/addresses/update.php')->only('admin');
 $router->delete('/addresses', 'customers/addresses/destroy.php')->only('admin');
+
+//Reports
+$router->get('/reports', 'reports/index.php')->only('admin');
+
+//Messages
+$router->get('/messages', 'messages/index.php')->only('admin');
+

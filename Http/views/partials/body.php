@@ -1,1 +1,1 @@
-<body class="dark:bg-dark-background w-full h-svh bg-gray-100">
+<body class="dark:bg-dark-background w-full h-svh bg-gray-50">
