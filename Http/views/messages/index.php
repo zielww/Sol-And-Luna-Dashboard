@@ -159,7 +159,7 @@ require base_path("Http/views/partials/main.php");
                 <?php endforeach; ?>
             </div>
             <!--            Chat Form-->
-            <form class="w-full h-full">
+            <form method="POST" action="<?= $_SERVER['REQUEST_URI'] ?>" class="w-full h-full">
                 <label for="chat" class="sr-only">Your message</label>
                 <div class="w-full h-full flex items-center px-3 py-2 rounded-lg dark:bg-gray-700">
                     <button type="button"
@@ -184,7 +184,7 @@ require base_path("Http/views/partials/main.php");
                         </svg>
                         <span class="sr-only">Add emoji</span>
                     </button>
-                    <textarea id="chat" rows="1"
+                    <textarea id="chat" rows="1" name="chat"
                               class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="Your message..."></textarea>
                     <button type="submit"
