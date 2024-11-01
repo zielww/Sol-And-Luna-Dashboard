@@ -18,7 +18,7 @@ class CategoryForm extends Form
             $this->errors['visibility'] = "visibility";
         }
 
-        if (!Validator::string($this->attributes['description'], 5, 50)) {
+        if (!Validator::string($this->attributes['description'], 5, 200)) {
             $this->errors['description'] = "description";
         }
     }
