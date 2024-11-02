@@ -1,3 +1,17 @@
+<?php
+
+use Core\App;
+use Core\Database;
+use Core\Session;
+
+$admin = Session::get('admin');
+$db = App::resolve(Database::class);
+$current_user = $db->query('select * from user_images where user_id = :user_id', [
+        'user_id' => $admin['user_id']
+])->find();
+
+?>
+
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
@@ -87,7 +101,7 @@
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full"
-                                 src="images/kuromi.jpg" alt="user photo">
+                                 src="uploads/<?= $current_user['name'] ?>" alt="user photo">
                         </button>
                     </div>
                     <div x-cloak  x-show="open" @click.away="open=false" x-anchor="$refs.button" x-collapse class="z-50 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600">

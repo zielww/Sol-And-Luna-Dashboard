@@ -6,6 +6,10 @@ use Core\Session;
 
 $success = Session::get('success') ?? '';
 $db = App::resolve(Database::class);
+$admin = Session::get('admin');
+$current_user = $db->query('select * from user_images where user_id = :user_id', [
+    'user_id' => $admin['user_id']
+])->find();
 
 $orders = $db->query("
     SELECT order_items.*, products.*, orders.created_at, orders.status

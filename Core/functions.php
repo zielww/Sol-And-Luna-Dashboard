@@ -82,3 +82,8 @@ function previous_url() : string
     $prev = parse_url($_SERVER['HTTP_REFERER']);
     return $prev['path'] . '?' . $prev['query'];
 }
+
+function generateUniqueId(): string
+{
+    return uniqid(rand(), true);
+}

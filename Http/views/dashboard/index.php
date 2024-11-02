@@ -15,7 +15,7 @@ require base_path("Http/views/partials/aside.php");
             dark:bg-gray-800">
                     <img class="w-12 h-12  p-1 mx-3 rounded-full ring-2 ring-gray-300
                 dark:ring-gray-500 sm:w-12 sm:h-12 sm:mx-4"
-                         src="images/kuromi.jpg"
+                         src="uploads/<?= $current_user['name'] ?>"
                          alt="Bordered avatar">
                     <div class="flex flex-col sm:hidden">
                         <h1 class="font-bold font-sans text-xs">Welcome</h1>

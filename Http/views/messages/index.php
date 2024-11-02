@@ -26,8 +26,9 @@ require base_path("Http/views/partials/main.php");
                             5) ? 'bg-gray-200' : 'bg-white' ?> py-3 px-1 sm:py-4 hover:bg-gray-100 rounded-md">
                             <a href="/messages?chat=<?= $user['user_id'] ?>" class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($user['name'] ?? '')
-                                    ?>"
+                                    <img class="w-8 h-8 rounded-full"
+                                         src="/uploads/<?= htmlspecialchars($user['name'] ?? '')
+                                         ?>"
                                          alt="profile picture">
                                 </div>
                                 <div class="flex-1 min-w-0 ms-4">
@@ -106,34 +107,35 @@ require base_path("Http/views/partials/main.php");
             </div>
             <!--            Message Content-->
             <div id="messages" class="message-container overflow-auto p-3 bg-white sm:p-4 w-full flex flex-col gap-2">
-                <?php foreach ($chat_history as $message ) : ?>
+                <?php foreach ($chat_history as $message) : ?>
                     <?php if ($message['sender_id'] == intval($_GET['chat'])) : ?>
-                    <!--                Chat Mate Message-->
-                    <div class="flex items-start gap-2.5">
-                        <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
-                        ?>" alt="profile picture">
-                        <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <!--                Chat Mate Message-->
+                        <div class="flex items-start gap-2.5">
+                            <img class="w-8 h-8 rounded-full"
+                                 src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
+                                 ?>" alt="profile picture">
+                            <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white"><?=
                                     htmlspecialchars(ucfirst($current_chat_mate['first_name']) . ' ' . ucfirst($current_chat_mate['last_name']) ?? '') ?></span>
-                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?= date('h:i A',
-                                        strtotime($message['sent_at'])) ?? ''
-                                    ?></span>
+                                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?= date('h:i A',
+                                            strtotime($message['sent_at'])) ?? ''
+                                        ?></span>
+                                </div>
+                                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white"><?=
+                                    htmlspecialchars($message['message_text'] ?? '') ?></p>
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
                             </div>
-                            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white"><?=
-                                htmlspecialchars($message['message_text'] ?? '') ?></p>
-                            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+                            <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
+                                    data-dropdown-placement="bottom-start"
+                                    class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
+                                    type="button">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                                </svg>
+                            </button>
                         </div>
-                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
-                                data-dropdown-placement="bottom-start"
-                                class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-                                type="button">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                            </svg>
-                        </button>
-                    </div>
                     <?php else: ?>
                         <!--                Your Message-->
                         <div class="flex items-start gap-2.5 self-end">
@@ -157,7 +159,7 @@ require base_path("Http/views/partials/main.php");
                                 </div>
                             </div>
                         </div>
-                    <?php endif;  ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
             <!--            Chat Form-->
@@ -223,18 +225,71 @@ require base_path("Http/views/partials/main.php");
         let channel = pusher.subscribe(chatChannel);
 
         // Look out for messages in this channel
-        channel.bind('message-sent', function(data) {
+        channel.bind('message-sent', function (data) {
             console.log(data);
             let messageContainer = document.getElementById('messages');
 
-            if (parseInt(data.sender_id) === myId) {
-                messageContainer.innerHTML += `<div>Sender: ${data.message}</div>`;
+            const options = {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            };
+
+            if (data.sender_id === myId) {
+                let senderDiv = `
+                    <div class="flex items-start gap-2.5 self-end">
+                            <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
+                                    data-dropdown-placement="bottom-start"
+                                    class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
+                                    type="button">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                                </svg>
+                            </button>
+                            <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Me</span>
+                                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">${data.message}</p>
+                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+                                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">${new Date()
+                    .toLocaleTimeString([], options)}</span>
+                                </div>
+                            </div>
+                        </div>
+                `;
+                messageContainer.innerHTML += senderDiv;
             } else {
-                messageContainer.innerHTML += `<div>Recipient: ${data.message}</div>`;
+                let recipientDiv = `
+                    <div class="flex items-start gap-2.5">
+                        <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
+                ?>" alt="profile picture">
+                        <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white"><?=
+                htmlspecialchars(ucfirst($current_chat_mate['first_name']) . ' ' . ucfirst($current_chat_mate['last_name']) ?? '') ?></span>
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">${new Date()
+                    .toLocaleTimeString([], options)}</span>
+                            </div>
+                            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">${data.message}</p>
+                            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+                        </div>
+                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
+                                data-dropdown-placement="bottom-start"
+                                class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
+                                type="button">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                messageContainer.innerHTML += recipientDiv;
             }
         });
 
-        document.getElementById('message-form').addEventListener('submit', function(e) {
+        document.getElementById('message-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
             let messageInput = document.querySelector('textarea[name="message"]');
@@ -246,11 +301,11 @@ require base_path("Http/views/partials/main.php");
                     message: message,
                     _token: document.querySelector('input[name="_token"]').value
                 })
-                    .then(function(response) {
+                    .then(function (response) {
                         console.log('Response:', response.data);
                         messageInput.value = '';
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.error('Error sending message:', error);
                     });
             }
