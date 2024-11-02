@@ -29,6 +29,7 @@ $current_chat_mate = $db->query("
     'user_id' => $_GET['chat']
 ])->find_or_fail();
 
+
 $chat_history = $db->query("
     SELECT * FROM messages 
     WHERE (sender_id = :user_id AND recipient_id = :chat_mate_id) 

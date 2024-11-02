@@ -16,7 +16,7 @@ require base_path("Http/views/partials/main.php");
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Messages</h5>
                 <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                    View all
+
                 </a>
             </div>
             <div class="flow-root">
@@ -26,16 +26,16 @@ require base_path("Http/views/partials/main.php");
                             5) ? 'bg-gray-200' : 'bg-white' ?> py-3 px-1 sm:py-4 hover:bg-gray-100 rounded-md">
                             <a href="/messages?chat=<?= $user['user_id'] ?>" class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($user['name'])
+                                    <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($user['name'] ?? '')
                                     ?>"
                                          alt="profile picture">
                                 </div>
                                 <div class="flex-1 min-w-0 ms-4">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                        <?= htmlspecialchars(ucfirst($user['first_name']) . ' ' . ucfirst($user['last_name'])) ?>
+                                        <?= htmlspecialchars(ucfirst($user['first_name']) . ' ' . ucfirst($user['last_name']) ?? '') ?>
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        <?= htmlspecialchars($user['email']) ?>
+                                        <?= htmlspecialchars($user['email'] ?? '') ?>
                                     </p>
                                 </div>
 
@@ -46,13 +46,13 @@ require base_path("Http/views/partials/main.php");
             </div>
         </div>
         <!--        Main Chat Window-->
-        <div class="grid sm:grid grid-rows-[10%_80%_10%] w-full bg-white border border-gray-200">
+        <div class="grid h-[90svh] sm:grid grid-rows-[10%_80%_10%] w-full bg-white border border-gray-200">
             <!--            User Details-->
             <div class="p-3 sm:p-4 w-full flex justify-between border-b border-gray-50">
                 <div class="flex items-center ">
                     <div class="flex-shrink-0">
                         <img class="w-10 h-10 rounded-full"
-                             src="/uploads/<?= htmlspecialchars($current_chat_mate['name'])
+                             src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                              ?>"
                              alt="profile picture">
                     </div>
@@ -105,21 +105,23 @@ require base_path("Http/views/partials/main.php");
                 </div>
             </div>
             <!--            Message Content-->
-            <div class="p-3 bg-white sm:p-4 w-full flex flex-col gap-2">
+            <div id="messages" class="message-container overflow-auto p-3 bg-white sm:p-4 w-full flex flex-col gap-2">
                 <?php foreach ($chat_history as $message ) : ?>
-                    <?php if ($message['recipient_id'] == intval($_GET['chat'])) : ?>
+                    <?php if ($message['sender_id'] == intval($_GET['chat'])) : ?>
                     <!--                Chat Mate Message-->
                     <div class="flex items-start gap-2.5">
-                        <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($current_chat_mate['name'])
+                        <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                         ?>" alt="profile picture">
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white"><?= htmlspecialchars(ucfirst($current_chat_mate['first_name']) . ' ' . ucfirst($current_chat_mate['last_name'])) ?></span>
-                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?= date('h:i A', strtotime($message['sent_at']))
+                                <span class="text-sm font-semibold text-gray-900 dark:text-white"><?=
+                                    htmlspecialchars(ucfirst($current_chat_mate['first_name']) . ' ' . ucfirst($current_chat_mate['last_name']) ?? '') ?></span>
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?= date('h:i A',
+                                        strtotime($message['sent_at'])) ?? ''
                                     ?></span>
                             </div>
                             <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white"><?=
-                                htmlspecialchars($message['message_text']) ?></p>
+                                htmlspecialchars($message['message_text'] ?? '') ?></p>
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
                         </div>
                         <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
@@ -159,7 +161,9 @@ require base_path("Http/views/partials/main.php");
                 <?php endforeach; ?>
             </div>
             <!--            Chat Form-->
-            <form method="POST" action="<?= $_SERVER['REQUEST_URI'] ?>" class="w-full h-full">
+            <form method="POST" id="message-form" class="w-full h-full">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="chat" value="<?= $_GET['chat'] ?>">
                 <label for="chat" class="sr-only">Your message</label>
                 <div class="w-full h-full flex items-center px-3 py-2 rounded-lg dark:bg-gray-700">
                     <button type="button"
@@ -184,7 +188,7 @@ require base_path("Http/views/partials/main.php");
                         </svg>
                         <span class="sr-only">Add emoji</span>
                     </button>
-                    <textarea id="chat" rows="1" name="chat"
+                    <textarea id="chat" rows="1" name="message"
                               class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="Your message..."></textarea>
                     <button type="submit"
@@ -199,6 +203,59 @@ require base_path("Http/views/partials/main.php");
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        Pusher.logToConsole = true;
+
+        let pusher = new Pusher('34b64d396c60eab0c004', {
+            cluster: 'ap1',
+            forceTLS: true
+        });
+
+        const myId = parseInt(<?= $admin['user_id'] ?>);
+        const chatMateId = parseInt(Object.fromEntries(new URLSearchParams(window.location.search)).chat);
+        const sortedId = [myId, chatMateId].sort((a, b) => a - b);
+        const chatChannel = `chat-channel-${sortedId[0]}-${sortedId[1]}`
+
+        //Subscribe to a channel
+        let channel = pusher.subscribe(chatChannel);
+
+        // Look out for messages in this channel
+        channel.bind('message-sent', function(data) {
+            console.log(data);
+            let messageContainer = document.getElementById('messages');
+
+            if (parseInt(data.sender_id) === myId) {
+                messageContainer.innerHTML += `<div>Sender: ${data.message}</div>`;
+            } else {
+                messageContainer.innerHTML += `<div>Recipient: ${data.message}</div>`;
+            }
+        });
+
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let messageInput = document.querySelector('textarea[name="message"]');
+            let message = messageInput.value;
+
+
+            if (message.trim() !== '') {
+                axios.post(window.location.href, {
+                    message: message,
+                    _token: document.querySelector('input[name="_token"]').value
+                })
+                    .then(function(response) {
+                        console.log('Response:', response.data);
+                        messageInput.value = '';
+                    })
+                    .catch(function(error) {
+                        console.error('Error sending message:', error);
+                    });
+            }
+        });
+    </script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>
