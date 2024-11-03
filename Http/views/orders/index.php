@@ -394,7 +394,7 @@ require base_path("Http/views/partials/main.php");
         </table>
     </div>
 
-    <script src="scripts/datatables/table.js"></script>
+    <script src="/public/scripts/datatables/table.js"></script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>

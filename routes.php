@@ -50,4 +50,5 @@ $router->get('/reports', 'reports/index.php')->only('admin');
 
 //Messages
 $router->get('/messages', 'messages/index.php')->only('admin');
+$router->post('/messages', 'messages/channel.php')->only('admin');
 

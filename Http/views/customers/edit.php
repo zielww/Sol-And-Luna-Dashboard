@@ -106,7 +106,7 @@ require base_path("Http/views/partials/main.php");
                 <div class="grid w-full gap-2 mt-2">
                     <?php if (!empty($image)) : ?>
                         <img class="w-full h-full overflow-auto border border-gray-300 rounded-md"
-                             src="uploads/<?=
+                             src="/public/uploads/<?=
                              htmlspecialchars($image['name'] ?? '') ?>"
                              alt="<?= htmlspecialchars($image['name'] ?? '') ?>">
                     <?php else: ?>
@@ -258,7 +258,7 @@ require base_path("Http/views/partials/main.php");
             </table>
         </div>
     </div>
-    <script src="scripts/datatables/table.js"></script>
+    <script src="/public/scripts/datatables/table.js"></script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>

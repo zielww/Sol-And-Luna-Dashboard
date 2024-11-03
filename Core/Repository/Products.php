@@ -38,6 +38,7 @@ class Products
 
     public function delete(int $id): void
     {
+        $this->remove_old_images($id);
         $this->db->query("DELETE FROM products WHERE product_id = :id", ['id' => $id]);
         Session::flash('success', 'Product deleted successfully!');
     }
@@ -122,8 +123,10 @@ class Products
                 throw new \RuntimeException("Error with file upload: $image_name");
             }
 
-            $target_path = $this->move_uploaded_file($upload_directory, $image_tmp_names[$index], $image_name);
-            $this->save_image_to_database($product_id, $image_name, $target_path, $index === 0);
+            $image_id = generateUniqueId();
+            $target_path = $this->move_uploaded_file($upload_directory, $image_tmp_names[$index], $image_id .
+            $image_name);
+            $this->save_image_to_database($product_id, $image_id . $image_name, $target_path, $index === 0);
         }
     }
 

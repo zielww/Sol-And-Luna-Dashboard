@@ -3,6 +3,7 @@
 use Core\Router;
 use Core\Session;
 use Core\ValidationException;
+use Dotenv\Dotenv;
 
 session_start();
 
@@ -10,13 +11,13 @@ const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . "Core/functions.php";
 
-//autoloader
-spl_autoload_register(function ($class) {
-    $class = str_replace('\\',DIRECTORY_SEPARATOR ,$class);
-    require base_path("{$class}.php");
-});
+require base_path('/vendor/autoload.php');
 
 require base_path("bootstrap.php");
+
+//Load environment file
+$dotenv = Dotenv::createImmutable(base_path(''));
+$dotenv->load();
 
 //Routing purposes
 $router = new Router();

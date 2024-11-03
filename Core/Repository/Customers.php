@@ -92,9 +92,11 @@ class Customers
 
     private function upload_image(int $customer_id): void
     {
+        $image_id = generateUniqueId();
         $upload_directory = $this->get_upload_directory();
-        $target_path = $this->move_uploaded_file($upload_directory, $_FILES['image']['tmp_name'], $_FILES['image']['name']);
-        $this->save_image_to_database($customer_id, $_FILES['image']['name'], $target_path);
+        $target_path = $this->move_uploaded_file($upload_directory, $_FILES['image']['tmp_name'], $image_id .
+            $_FILES['image']['name']);
+        $this->save_image_to_database($customer_id, $image_id . $_FILES['image']['name'], $target_path);
     }
 
     private function save_image_to_database(int $user_id, string $image_name, string $image_path): void

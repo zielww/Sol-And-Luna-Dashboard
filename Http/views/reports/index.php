@@ -697,11 +697,11 @@ require base_path("Http/views/partials/main.php");
         </div>
     </div>
 
-    <script src="scripts/charts/lineChart.js" type="module"></script>
-    <script src="scripts/charts/columnChart.js" type="module"></script>
-    <script src="scripts/charts/barChart.js" type="module"></script>
-    <script src="scripts/charts/donutChart.js" type="module"></script>
-    <script src="scripts/charts/radialChart.js" type="module"></script>
+    <script src="/public/scripts/charts/lineChart.js" type="module"></script>
+    <script src="/public/scripts/charts/columnChart.js" type="module"></script>
+    <script src="/public/scripts/charts/barChart.js" type="module"></script>
+    <script src="/public/scripts/charts/donutChart.js" type="module"></script>
+    <script src="/public/scripts/charts/radialChart.js" type="module"></script>
 
     <?php
     require base_path("Http/views/partials/footer.php");

@@ -120,7 +120,7 @@ require base_path("Http/views/partials/main.php");
                     <?php if (!empty($images)) :   ?>
                         <?php foreach ($images as $image) :  ?>
                             <img class="w-full h-full overflow-auto border border-gray-300 rounded-md"
-                                 src="uploads/<?=
+                                 src="/public/uploads/<?=
                                 htmlspecialchars($image['name'] ?? '')?>" alt="<?= htmlspecialchars($image['name'] ?? '') ?>">
                         <?php endforeach;  ?>
                     <?php else:  ?>
