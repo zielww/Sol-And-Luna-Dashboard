@@ -190,9 +190,9 @@ require base_path("Http/views/partials/main.php");
                         </svg>
                         <span class="sr-only">Add emoji</span>
                     </button>
-                    <textarea id="chat" rows="1" name="message"
+                    <input id="chat" name="message"
                               class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Your message..."></textarea>
+                              placeholder="Your message..."></input>
                     <button type="submit"
                             class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
                         <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true"
@@ -300,7 +300,7 @@ require base_path("Http/views/partials/main.php");
         document.getElementById('message-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            let messageInput = document.querySelector('textarea[name="message"]');
+            let messageInput = document.querySelector('#chat');
             let message = messageInput.value;
 
             if (message.trim() !== '') {
