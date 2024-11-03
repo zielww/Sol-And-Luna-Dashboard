@@ -130,14 +130,14 @@ require base_path("Http/views/partials/main.php");
                                                     bottom-full pt-2 pointer-events-none
                                                     transition-all duration-200 ease-in-out transform scale-95 group-hover:scale-100">
                                             <div class="bg-white rounded-lg shadow-lg p-2">
-                                                <img src="uploads/<?= $image['name'] ?? '' ?>"
+                                                <img src="/public/uploads/<?= $image['name'] ?? '' ?>"
                                                      alt="<?= $image['name'] ?? '' ?>"
                                                      class="h-56 w-56 object-cover rounded-md">
                                             </div>
                                         </div>
                                         <img class="z-[999] w-20 h-16 cursor-pointer sm:w-16 overflow-auto border
                                         border-gray-300 rounded-md"
-                                             src="uploads/<?= $image['name'] ?? '' ?>"
+                                             src="/public/uploads/<?= $image['name'] ?? '' ?>"
                                              alt="<?= $image['name'] ?? '' ?>">
                                     </div>
                                 <?php endforeach; ?>
@@ -190,7 +190,7 @@ require base_path("Http/views/partials/main.php");
         </table>
     </div>
 
-    <script src="scripts/datatables/products.js"></script>
+    <script src="/public/scripts/datatables/products.js"></script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>

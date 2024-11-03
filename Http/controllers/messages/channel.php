@@ -30,9 +30,10 @@ $messageData = [
     'sender_id' => intval($admin['user_id']),
     'recipient_id' => intval($_GET['chat']),
     'message' => $data['message'] ?? 'Empty',
+    'sent_at' => date('Y-m-d H:i:s'),
 ];
 
-$db->query("INSERT INTO messages (sender_id, recipient_id, message_text) VALUES (:sender_id, :recipient_id, :message)", $messageData);
+$db->query("INSERT INTO messages (sender_id, recipient_id, message_text, sent_at) VALUES (:sender_id, :recipient_id, :message, :sent_at)", $messageData);
 
 $pusher->trigger($chat_channel, 'message-sent', $messageData);
 

@@ -27,7 +27,7 @@ require base_path("Http/views/partials/main.php");
                             <a href="/messages?chat=<?= $user['user_id'] ?>" class="flex items-center">
                                 <div class="flex-shrink-0">
                                     <img class="w-8 h-8 rounded-full"
-                                         src="/uploads/<?= htmlspecialchars($user['name'] ?? '')
+                                         src="/public/uploads/<?= htmlspecialchars($user['name'] ?? '')
                                          ?>"
                                          alt="profile picture">
                                 </div>
@@ -53,7 +53,7 @@ require base_path("Http/views/partials/main.php");
                 <div class="flex items-center ">
                     <div class="flex-shrink-0">
                         <img class="w-10 h-10 rounded-full"
-                             src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
+                             src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                              ?>"
                              alt="profile picture">
                     </div>
@@ -112,7 +112,7 @@ require base_path("Http/views/partials/main.php");
                         <!--                Chat Mate Message-->
                         <div class="flex items-start gap-2.5">
                             <img class="w-8 h-8 rounded-full"
-                                 src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
+                                 src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                                  ?>" alt="profile picture">
                             <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -216,17 +216,21 @@ require base_path("Http/views/partials/main.php");
             forceTLS: true
         });
 
+        let messageDiv = document.getElementById('messages');
         const myId = parseInt(<?= $admin['user_id'] ?>);
         const chatMateId = parseInt(Object.fromEntries(new URLSearchParams(window.location.search)).chat);
         const sortedId = [myId, chatMateId].sort((a, b) => a - b);
         const chatChannel = `chat-channel-${sortedId[0]}-${sortedId[1]}`
+
+        function scrollToBottom() {
+            messageDiv.scrollTop = messageDiv.scrollHeight;
+        }
 
         //Subscribe to a channel
         let channel = pusher.subscribe(chatChannel);
 
         // Look out for messages in this channel
         channel.bind('message-sent', function (data) {
-            console.log(data);
             let messageContainer = document.getElementById('messages');
 
             const options = {
@@ -262,7 +266,7 @@ require base_path("Http/views/partials/main.php");
             } else {
                 let recipientDiv = `
                     <div class="flex items-start gap-2.5">
-                        <img class="w-8 h-8 rounded-full" src="/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
+                        <img class="w-8 h-8 rounded-full" src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                 ?>" alt="profile picture">
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -287,14 +291,17 @@ require base_path("Http/views/partials/main.php");
                 `;
                 messageContainer.innerHTML += recipientDiv;
             }
+
+            scrollToBottom();
         });
+
+        window.addEventListener('load', scrollToBottom);
 
         document.getElementById('message-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
             let messageInput = document.querySelector('textarea[name="message"]');
             let message = messageInput.value;
-
 
             if (message.trim() !== '') {
                 axios.post(window.location.href, {
