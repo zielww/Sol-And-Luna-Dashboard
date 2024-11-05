@@ -5,6 +5,7 @@ use Core\Repository\Customers;
 use Http\Forms\CustomerForm;
 
 $form = CustomerForm::validate($attributes = [
+    'create' => true,
     'first_name' => $_POST['first_name'],
     'last_name' => $_POST['last_name'],
     'email' => strtolower($_POST['email']),

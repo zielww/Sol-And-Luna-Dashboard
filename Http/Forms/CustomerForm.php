@@ -36,7 +36,7 @@ class CustomerForm extends Form
             $this->errors['country'] = "country";
         }
 
-        if (!empty($this->attributes['image']['tmp_name'])) {
+        if ($this->attributes['create']) {
             if (!Validator::image($this->attributes['image'])) {
                 $this->errors['image'] = "image";
             }
