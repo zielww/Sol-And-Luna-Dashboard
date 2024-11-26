@@ -1,0 +1,52 @@
+name: Deploy PHP to InfinityFree
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.12'
+          composer: true
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-interaction --prefer-dist 
+
+      - name: Upload .env file
+        run: echo "$ENV_FILE" > .env
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+
+      - name: Set up FTP deployment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Deploy to InfinityFree via FTP
+        run: |
+          lftp -f "
+          open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER:$FTP_PORT
+          lcd ./  
+          cd /admin.solapparel.live/htdocs 
+          mirror -R ./ ./  
+          bye
+          "
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+
+      - name: Confirm deployment
+        run: |
+          echo "Deployment Completed!"
