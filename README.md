@@ -1,17 +1,18 @@
-# ✨ Sol & Luna Dashboard
+<h1 align="center">Welcome to Sol-And-Luna-Dashboard 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="help.solapparel.live" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="#" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+  <a href="https://twitter.com/zielww" target="_blank">
+    <img alt="Twitter: zielww" src="https://img.shields.io/twitter/follow/zielww.svg?style=social" />
+  </a>
+</p>
 
-Welcome to **Sol & Luna Dashboard**, a modern and sleek admin dashboard specifically created for the efficient management of eCommerce Shopping Platform Sol & Luna Apparel. The dashboard is equipped with robust monitoring tools and pages that allows administrators to monitor the state of the platform.
-
-
-
-## Screenshots
-
-![login](screenshots/login.png)
-![dashboard](screenshots/dashboard.png)
-
-## Demo
-
-Check out the live demo of the project [Sol & Luna Admin Dashboard](https://admin.solapparel.live).
+> Sol & Luna Dashboard, a modern admin dashboard specifically created for the efficient management of eCommerce Shopping Platform Sol & Luna Apparel.
 
 ## Installation
 
@@ -51,8 +52,17 @@ Add an .env file
 
 **Server:** PHP
 
-
 ## Author
 
-- [@PatriarchCain](https://www.github.com/CainMcRolan)
+👤 **zielww**
 
+* Website: shimijallores.me
+* Twitter: [@zielww](https://twitter.com/zielww)
+* Github: [@zielww](https://github.com/zielww)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## License
+[MIT](https://github.com/zielww/Sol-And-Luna-Dashboard/LICENSE)
