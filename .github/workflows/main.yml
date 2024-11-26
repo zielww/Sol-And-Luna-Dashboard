@@ -32,10 +32,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
 
-      - name: Test FTP Connection
+      - name: Deploy to InfinityFree via FTP
         run: |
-          lftp -e "
+          lftp -f "
           open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER:$FTP_PORT
+          lcd ./  
+          cd /admin.solapparel.live/htdocs 
+          mirror -R ./ ./  
           bye
           "
         env:
