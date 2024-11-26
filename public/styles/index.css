@@ -15,18 +15,42 @@
 .status_indicator {
     @apply flex items-center gap-2 font-semibold cursor-pointer max-w-fit text-sm border rounded-md py-2 px-3;
 }
+
 .status_indicator svg {
     @apply w-5 h-5;
 }
+
 .status_selected {
     @apply bg-orange-500 text-white border-orange-500;
 }
+
 .status_selected svg path {
     @apply fill-current;
 }
+
 .status_not_selected {
     @apply bg-white border-gray-300 hover:bg-gray-200 hover:border-gray-500;
 }
+
 .status_not_selected svg path {
     @apply fill-gray-500;
+}
+
+.ts-control {
+    background-color: rgb(249 250 251) !important;
+    border: 1px solid rgb(209 213 219) !important;
+    color: rgb(17 24 39) !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    border-radius: 0.5rem !important;
+    width: 100% !important;
+    padding: 0.625rem !important;
+}
+
+.ql-toolbar {
+    @apply rounded-t-md bg-gray-50;
+}
+
+.ql-container {
+    @apply rounded-b-md bg-gray-50;
 }
