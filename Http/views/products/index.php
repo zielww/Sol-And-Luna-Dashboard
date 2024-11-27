@@ -150,7 +150,7 @@ require base_path("Http/views/partials/main.php");
                         <?= htmlspecialchars($product['name']) ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= substr($product['description'], 0, 100) ?? '' ?>
+                        <?= substr(trim(strip_tags($product['description'])), 0, 80) ?? '' ?>...
                     </td>
                     <td class="px-6 py-4">
                         <?php if ($product['visibility'] == 1) : ?>
@@ -170,7 +170,7 @@ require base_path("Http/views/partials/main.php");
                         <?php endif; ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars(number_format($product['stock_quantity'], 2)) ?>
+                        <?= htmlspecialchars($product['stock_quantity']) ?>
                     </td>
                     <td class="px-6 py-4">
                         <?php

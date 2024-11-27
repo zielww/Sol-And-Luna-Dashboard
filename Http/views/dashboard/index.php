@@ -242,7 +242,7 @@ require base_path("Http/views/partials/aside.php");
                             <?= htmlspecialchars($order['name']) ?>
                         </td>
                         <td class="px-6 py-4">
-                            <?= htmlspecialchars(substr($order['description'], 0, 30)) ?>
+                            <?= htmlspecialchars(substr(trim(strip_tags($order['description'])), 0, 30)) ?>...
                         </td>
                         <td class="px-6 py-4">
                             <?php if (strtolower($order['status']) === 'new') : ?>

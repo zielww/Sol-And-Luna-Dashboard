@@ -17,8 +17,9 @@ class Categories
 
     public function store(array $attributes): void
     {
-        $this->db->query("INSERT INTO categories (name, visibility, description) VALUES (:name, :visibility, :description)", [
+        $this->db->query("INSERT INTO categories (name, parent_category_id, visibility, description) VALUES (:name, :parent_category_id, :visibility, :description)", [
             'name' => $attributes['name'],
+            'parent_category_id' => $attributes['parent_category'],
             'visibility' => $attributes['visibility'] === 'true' ? 1 : 0,
             'description' => $attributes['description'],
         ]);

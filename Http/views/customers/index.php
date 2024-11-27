@@ -102,7 +102,7 @@ require base_path("Http/views/partials/main.php");
                         <?= htmlspecialchars(ucfirst($customer['country']) ?? 'NA') ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars('(+63) ' . substr($customer['phone'], 1) ?? '') ?>
+                        <?= htmlspecialchars('(+63) ' . substr($customer['phone'] ?? '', 1) ?? '') ?>
                     </td>
                     <td class="px-6 py-4 ">
                         <?= date('Y/m/d H:i:s', strtotime($customer['created_at'])) ?>

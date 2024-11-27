@@ -10,7 +10,7 @@ $main_categories = $db->query("select * from categories where parent_category_id
 $categories = $db->query("select * from categories where parent_category_id != :parent and visibility = :visible", [':parent' => 0, 'visible' => '1'])->get();
 
 $products = $db->query("
-    SELECT p.product_id, p.name, p.description, p.visibility, p.price, p.stock_quantity, p.category_id, p.created_by, p.created_at, 
+    SELECT p.product_id, p.name, p.description, p.visibility, p.price, p.stock_quantity, p.created_at, 
            pi.image_id, pi.image_url, pi.is_primary 
     FROM products p 
     LEFT JOIN product_images pi 

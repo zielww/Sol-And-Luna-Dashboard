@@ -38,7 +38,7 @@ class Validator {
             return false;
         }
 
-        $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'];
         if (!in_array($file['type'], $validMimeTypes)) {
             return false;
         }

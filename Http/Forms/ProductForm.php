@@ -15,11 +15,11 @@ class ProductForm extends Form
         }
 
         if (!Validator::number($this->attributes['price'], 1, 999999)) {
-            $this->errors['price'] = "pricing.";
+            $this->errors['price'] = "pricing";
         }
 
         if (!Validator::number($this->attributes['quantity'], 1, 999999)) {
-            $this->errors['quantity'] = "quantity.";
+            $this->errors['quantity'] = "quantity";
         }
 
         foreach ($this->attributes['category'] as $category) {
