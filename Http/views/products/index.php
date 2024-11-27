@@ -150,7 +150,7 @@ require base_path("Http/views/partials/main.php");
                         <?= htmlspecialchars($product['name']) ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars(ucfirst(substr($product['description'], 0, 50)) ?? '') ?>
+                        <?= substr($product['description'], 0, 100) ?? '' ?>
                     </td>
                     <td class="px-6 py-4">
                         <?php if ($product['visibility'] == 1) : ?>

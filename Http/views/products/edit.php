@@ -27,24 +27,34 @@ require base_path("Http/views/partials/main.php");
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="mb-6">
-                <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
-                dark:text-white">Category <span class="text-red-500">*</span></label>
-                <label for="category"></label><select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900
-                        text-sm
-                        rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <?php foreach ($categories as $category) : ?>
-                        <?php if ($category['name'] === $product_category['name']) : ?>
-                            <option selected value="<?= htmlspecialchars($category['name']) ?>"><?= htmlspecialchars($category['name']) ?></option>
-                        <?php else: ?>
-                            <option value="<?= htmlspecialchars($category['name']) ?>"><?= htmlspecialchars($category['name']) ?></option>
-                        <?php endif; ?>
+                <label for="select-tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories<span
+                            class="text-red-500">*</span></label>
+                <select id="select-tags" multiple>
+                    <?php foreach ($main_categories as $main_category) : ?>
+                        <optgroup label="<?= htmlspecialchars(ucfirst($main_category['name'] ?? '')) ?>">
+                            <?php foreach ($categories as $category) : ?>
+                                <?php if ($category['parent_category_id'] == $main_category['category_id']) : ?>
+                                    <?php if (in_array($category['name'], $product_categories)) : ?>
+                                        <option value="<?= ucfirst($category['name']) ?>" selected><?= ucfirst($category['name']) ?></option>
+                                    <?php else: ?>
+                                        <option value="<?= ucfirst($category['name']) ?>"><?= ucfirst($category['name']) ?></option>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </optgroup>
                     <?php endforeach; ?>
                 </select>
+                <label>
+                    <input type="hidden" name="category" id="category">
+                </label>
             </div>
-            <div class="mb-6">
+            <div x-data="{ amount:'<?= htmlspecialchars($product['price'] ?? '') ?>'}" class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
                 dark:text-white">Price <span class="text-red-500">*</span></label>
-                <input type="number" name="price" value="<?= htmlspecialchars($product['price'] ?? '') ?>"
+                <input x-mask:dynamic="$money($input)"
+                       x-model="amount"
+                       type="text"
+                       name="price"
                        id="default-input"
                        class="bg-gray-50 border
                 border-gray-300
@@ -52,20 +62,26 @@ require base_path("Http/views/partials/main.php");
                 text-sm
                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
-            <div class="mb-6">
+            <div x-data="{ amount:'<?= htmlspecialchars($product['stock_quantity'] ?? '') ?>'}" class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900
                 dark:text-white">Quantity <span class="text-red-500">*</span></label>
-                <input type="number" name="quantity" value="<?= htmlspecialchars($product['stock_quantity'] ?? '') ?>"
-                       id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                <input x-mask:dynamic="$money($input)"
+                       x-model="amount"
+                       type="text"
+                       name="quantity"
+                       id="default-input"
+                       class="bg-gray-50 border
+                border-gray-300
+                text-gray-900
+                text-sm
                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
-            <div class="col-span-2">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm
-                        text-gray-900
-                        bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="Write product description here"><?= htmlspecialchars($product['description']
-                        ?? '') ?></textarea>
+            <div class="col-span-2 mb-20">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description <span class="text-red-500">*</span></label>
+                <div id="editor"><?= $product['description'] ?? '' ?></div>
+                <textarea id="description" name="description" rows="4" class="hidden" placeholder="Write product description here">
+                            <?= $product['description'] ?? '' ?>
+                </textarea>
             </div>
         </div>
 
@@ -116,16 +132,16 @@ require base_path("Http/views/partials/main.php");
                                class="hidden"/>
                     </label>
                 </div>
-                <div class="grid w-full gap-2 mt-2 sm:grid-cols-3">
-                    <?php if (!empty($images)) :   ?>
-                        <?php foreach ($images as $image) :  ?>
+                <div class="grid w-full gap-2 mt-2 sm:grid-cols-4">
+                    <?php if (!empty($images)) : ?>
+                        <?php foreach ($images as $image) : ?>
                             <img class="w-full h-full overflow-auto border border-gray-300 rounded-md"
                                  src="/public/uploads/<?=
-                                htmlspecialchars($image['name'] ?? '')?>" alt="<?= htmlspecialchars($image['name'] ?? '') ?>">
-                        <?php endforeach;  ?>
-                    <?php else:  ?>
+                                 htmlspecialchars($image['name'] ?? '') ?>" alt="<?= htmlspecialchars($image['name'] ?? '') ?>">
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <img src="" alt="No image available">
-                    <?php endif;  ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -145,12 +161,14 @@ require base_path("Http/views/partials/main.php");
     <script>
         document.getElementById('dropzone-file').addEventListener('change', function () {
             const files = this.files;
-            if (files.length > 3) {
+            if (files.length > 4) {
                 alert('You can only upload a maximum of 3 images.');
                 this.value = '';
             }
         });
     </script>
+    <script src="/public/scripts/multiSelect.js"></script>
+    <script src="/public/scripts/wysiwyg.js"></script>
     <?php
     require base_path("Http/views/partials/footer.php");
     ?>

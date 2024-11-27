@@ -10,15 +10,15 @@
      x-transition:leave-end="opacity-0"
      tabindex="-1"
      class="overflow-y-auto overflow-x-hidden fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div  @click.away="isOpen = false"
-          x-show="isOpen"
-          x-transition:enter="transition ease-out duration-300 transform"
-          x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-          x-transition:leave="transition ease-in duration-200 transform"
-          x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          class="relative p-4 w-full max-w-md max-h-full">
+    <div @click.away="isOpen = false"
+         x-show="isOpen"
+         x-transition:enter="transition ease-out duration-300 transform"
+         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+         x-transition:leave="transition ease-in duration-200 transform"
+         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+         class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
@@ -45,36 +45,48 @@
                                     class="text-red-500">*</span></label>
                         <input type="text" name="name" id="name"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                               placeholder="" required="">
+                               placeholder="" required>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                    <div x-data="{ amount:'' }" class="col-span-2 sm:col-span-1">
                         <label for="price"
                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price<span
                                     class="text-red-500">*</span></label>
-                        <input type="number" step="any" name="price" id="price"
+                        <input x-mask:dynamic="$money($input)"
+                               x-model="amount"
+                               type="text"
+                               name="price"
+                               id="price"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                               placeholder="" required="">
+                               placeholder="" required>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                    <div x-data="{ amount:'' }" class="col-span-2 sm:col-span-1">
                         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900
                         dark:text-white">Quantity<span class="text-red-500">*</span></label>
-                        <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300
+                        <input x-mask:dynamic="$money($input)"
+                               x-model="amount"
+                               type="text" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300
                         text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                               placeholder="" required="">
+                               placeholder="" required>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category<span
+                    <div class="col-span-2">
+                        <label for="select-tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories<span
                                     class="text-red-500">*</span></label>
-                        <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900
-                        text-sm
-                        rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option disabled selected>Select Category</option>
-                            <?php foreach ($categories as $category) : ?>
-                                <option value="<?= $category['name'] ?>"><?= ucfirst($category['name']) ?></option>
+                        <select id="select-tags" multiple>
+                            <?php foreach ($main_categories as $main_category) : ?>
+                                <optgroup label="<?= htmlspecialchars(ucfirst($main_category['name'] ?? '')) ?>">
+                                    <?php foreach ($categories as $category) : ?>
+                                        <?php if ($category['parent_category_id'] == $main_category['category_id']) : ?>
+                                            <option value="<?= ucfirst($category['name']) ?>"><?= ucfirst($category['name']) ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </optgroup>
                             <?php endforeach; ?>
                         </select>
+                        <label>
+                            <input type="hidden" name="category" id="category">
+                        </label>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                    <div class="col-span-2">
                         <label for="visibility" class="block mb-2 text-sm font-medium text-gray-900
                         dark:text-white">Visibility<span class="text-red-500">*</span></label>
                         <select id="visibility" name="visibility" class="bg-gray-50 border border-gray-300
@@ -85,12 +97,11 @@
                             <option value="false">Invisible</option>
                         </select>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-2 mb-20">
                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
                             Description<span class="text-red-500">*</span></label>
-                        <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm
-                        text-gray-900
-                        bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        <div id="editor"></div>
+                        <textarea id="description" name="description" rows="4" class="hidden"
                                   placeholder="Write product description here"></textarea>
                     </div>
                     <div class="col-span-2">
@@ -100,11 +111,11 @@
                         <input type="file" id="images" name="images[]" accept="image/*" multiple class="block w-full
                         text-sm
                         text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can upload up to 3 images.</p>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can upload up to 4 images. 2mb max. (JPG, PNG, GIF, WEBP)</p>
                     </div>
                 </div>
                 <button type="submit"
-                        class="text-white inline-flex items-center bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="w-full text-white inline-flex items-center justify-center bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -120,9 +131,11 @@
 <script>
     document.getElementById('images').addEventListener('change', function () {
         const files = this.files;
-        if (files.length > 3) {
-            alert('You can only upload a maximum of 2 images.');
+        if (files.length > 4) {
+            alert('You can only upload a maximum of 4 images.');
             this.value = '';
         }
     });
 </script>
+<script src="/public/scripts/multiSelect.js"></script>
+<script src="/public/scripts/wysiwyg.js"></script>

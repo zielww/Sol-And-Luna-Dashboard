@@ -22,15 +22,17 @@ class ProductForm extends Form
             $this->errors['quantity'] = "quantity.";
         }
 
-        if (!Validator::string($this->attributes['category'],1,100)) {
-            $this->errors['category'] = "category";
+        foreach ($this->attributes['category'] as $category) {
+            if (!Validator::string($category,1,100)) {
+                $this->errors['category'] = "category";
+            }
         }
 
         if (!Validator::string($this->attributes['visibility'], 1, 100)) {
             $this->errors['visibility'] = "visibility";
         }
 
-        if (!Validator::string($this->attributes['description'], 5, 200)) {
+        if (!Validator::string($this->attributes['description'], 5, 5000)) {
             $this->errors['description'] = "description";
         }
 

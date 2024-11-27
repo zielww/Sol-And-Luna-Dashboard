@@ -5,7 +5,10 @@ use Core\Database;
 use Core\Repository\Products;
 
 $db = App::resolve(Database::class);
-$categories = $db->query("select * from categories where visibility = :visible", ['visible' => '1'])->get();
+
+$main_categories = $db->query("select * from categories where parent_category_id = :parent and visibility = :visible", [':parent' => 0, ':visible' => 1])->get();
+
+$categories = $db->query("select * from categories where parent_category_id != :parent and visibility = :visible", [':parent' => 0, 'visible' => '1'])->get();
 
 $products = $db->query("
     SELECT p.product_id, p.name, p.description, p.visibility, p.price, p.stock_quantity, p.category_id, p.created_by, p.created_at, 
@@ -14,8 +17,20 @@ $products = $db->query("
     LEFT JOIN product_images pi 
     ON p.product_id = pi.product_id
 ")->get();
+
 $product = current(array_filter($products, fn($product) => $product['product_id'] == $_GET['id']));
-$product_category = $db->query("SELECT * FROM categories WHERE category_id = :id", ['id' => $product['category_id']])->find();
+
+$product_categories = $db->query("
+    SELECT c.name 
+    FROM categories c 
+    JOIN product_categories pc 
+    ON pc.category_id = c.category_id 
+    WHERE pc.product_id = :product_id"
+    , ['product_id' => $product['product_id']])->get();
+
+$product_categories = array_map(function($item) {
+    return $item['name'];
+}, $product_categories);
 
 $images = (new Products())->get_product_images((int)$product['product_id'], false);
 

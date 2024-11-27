@@ -5,9 +5,9 @@ use Http\Forms\ProductForm;
 
 $form = ProductForm::validate($attributes = [
     'name' => $_POST['name'],
-    'price' => $_POST['price'],
-    'quantity' => $_POST['quantity'],
-    'category' => $_POST['category'],
+    'price' => floatval($_POST['price']),
+    'quantity' => floatval($_POST['price']),
+    'category' => explode(',',$_POST['category']),
     'visibility' => $_POST['visibility'],
     'description' => $_POST['description'],
     'images' => $_FILES['images'],

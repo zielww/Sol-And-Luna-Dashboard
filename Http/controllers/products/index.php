@@ -2,9 +2,12 @@
 
 use Core\App;
 use Core\Database;
+
 $db = App::resolve(Database::class);
 
-$categories = $db->query("select * from categories where visibility = :visible", ['visible' => '1'])->get();
+$main_categories = $db->query("select * from categories where parent_category_id = :parent and visibility = :visible", [':parent' => 0, ':visible' => 1])->get();
+
+$categories = $db->query("select * from categories where parent_category_id != :parent and visibility = :visible", [':parent' => 0, 'visible' => '1'])->get();
 
 $products = $db->query("
     SELECT p.product_id, p.name, p.description, p.visibility, p.price, p.stock_quantity, p.category_id, p.created_by, p.created_at, 
@@ -20,5 +23,6 @@ $total_quantity = array_reduce($products, function ($carry, $product) {
 $total_price = array_reduce($products, function ($carry, $item) {
     return $carry + ($item['stock_quantity'] * floatval($item['price']));
 }, 0);
+
 
 require base_path('Http/views/products/index.php');

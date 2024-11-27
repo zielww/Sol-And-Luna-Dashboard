@@ -29,7 +29,7 @@ require base_path("Http/views/partials/main.php");
                                     <img class="w-8 h-8 rounded-full"
                                          src="/public/uploads/<?= htmlspecialchars($user['name'] ?? '')
                                          ?>"
-                                         alt="profile picture">
+                                         alt="">
                                 </div>
                                 <div class="flex-1 min-w-0 ms-4">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -55,7 +55,7 @@ require base_path("Http/views/partials/main.php");
                         <img class="w-10 h-10 rounded-full"
                              src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
                              ?>"
-                             alt="profile picture">
+                             alt="">
                     </div>
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-md font-semibold text-gray-900 truncate dark:text-white">
@@ -113,7 +113,7 @@ require base_path("Http/views/partials/main.php");
                         <div class="flex items-start gap-2.5">
                             <img class="w-8 h-8 rounded-full"
                                  src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
-                                 ?>" alt="profile picture">
+                                 ?>" alt="">
                             <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white"><?=
@@ -267,7 +267,7 @@ require base_path("Http/views/partials/main.php");
                 let recipientDiv = `
                     <div class="flex items-start gap-2.5">
                         <img class="w-8 h-8 rounded-full" src="/public/uploads/<?= htmlspecialchars($current_chat_mate['name'] ?? '')
-                ?>" alt="profile picture">
+                ?>" alt="">
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white"><?=
