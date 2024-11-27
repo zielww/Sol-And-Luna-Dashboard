@@ -13,7 +13,6 @@ $form = ProductForm::validate($attributes = [
     'images' => $_FILES['images'],
 ]);
 
-
 (new Products())->store($attributes);
 
 redirect('/products');

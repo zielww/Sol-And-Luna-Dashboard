@@ -13,10 +13,10 @@ let select = new TomSelect("#select-tags", {
         item: function (data, escape) {
             return '<div class="item border rounded-md bg-white border-neutral-800">' + escape(data.value) + '</div>';
         }
-    }
+    },
 });
 
+document.querySelector("#category").value = select.getValue().toString();
 document.querySelector("#select-tags").addEventListener('change', () => {
     document.querySelector("#category").value = select.getValue().toString();
-    console.log(select.getValue().toString());
 });

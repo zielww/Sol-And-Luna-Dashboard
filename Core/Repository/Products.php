@@ -24,17 +24,17 @@ class Products
         Session::flash('success', 'Product added successfully!');
     }
 
-//    public function update(array $attributes): void
-//    {
-//        $category = $this->get_category($attributes['category']);
-//        $this->update_product($attributes, $category['category_id']);
-//
-//        if (!empty($_FILES['images']['name'][0])) {
-//            $this->upload_images($attributes['product_id'], false);
-//        }
-//
-//        Session::flash('success', 'Product updated successfully!');
-//    }
+    public function update(array $attributes): void
+    {
+        $categories = $this->get_categories($attributes['category']);
+        $this->update_product($attributes, $categories);
+
+        if (!empty($_FILES['images']['name'][0])) {
+            $this->upload_images($attributes['product_id'], false);
+        }
+
+        Session::flash('success', 'Product updated successfully!');
+    }
 
     public function delete(int $id): void
     {
@@ -85,19 +85,27 @@ class Products
         return $product['product_id'];
     }
 
-//    private function update_product(array $attributes, int $category_id): void
-//    {
-//        $this->db->query("UPDATE products SET name = :name, description = :description, visibility = :visibility,
-//            price = :price, stock_quantity = :stock_quantity, category_id = :category_id WHERE product_id = :product_id", [
-//            'name' => $attributes['name'],
-//            'description' => $attributes['description'],
-//            'visibility' => $attributes['visibility'] === 'true' ? 1 : 0,
-//            'price' => floatval($attributes['price']),
-//            'stock_quantity' => (int)$attributes['quantity'],
-//            'category_id' => $category_id,
-//            'product_id' => $attributes['product_id'],
-//        ]);
-//    }
+    private function update_product(array $attributes, array $categories): void
+    {
+        $this->db->query("UPDATE products SET name = :name, description = :description, visibility = :visibility,
+            price = :price, stock_quantity = :stock_quantity WHERE product_id = :product_id", [
+            'name' => $attributes['name'],
+            'description' => $attributes['description'],
+            'visibility' => $attributes['visibility'] === 'true' ? 1 : 0,
+            'price' => floatval($attributes['price']),
+            'stock_quantity' => (int)$attributes['quantity'],
+            'product_id' => $attributes['product_id'],
+        ]);
+
+        $this->db->query("DELETE FROM product_categories WHERE product_id = :product_id", ['product_id' => $attributes['product_id']]);
+
+        foreach ($categories as $category) {
+            $this->db->query("INSERT INTO product_categories (product_id, category_id) VALUES (:product_id, :category_id)", [
+                'product_id' => $attributes['product_id'],
+                'category_id' => intval($category['category_id']),
+            ]);
+        }
+    }
 
     private function get_upload_directory(): string
     {

@@ -5,7 +5,7 @@ require base_path("Http/views/partials/nav.php");
 require base_path("Http/views/partials/aside.php");
 require base_path("Http/views/partials/main.php");
 ?>
-<div x-data="{ isOpen: true}" class="p-4 h-svh w-full rounded-lg dark:border-gray-700 mt-14">
+<div x-data="{ isOpen: false}" class="p-4 h-svh w-full rounded-lg dark:border-gray-700 mt-14">
 
     <!--    Error Notification-->
     <?php require base_path("Http/views/partials/alerts.php") ?>
@@ -150,7 +150,7 @@ require base_path("Http/views/partials/main.php");
                         <?= htmlspecialchars($product['name']) ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars(ucfirst(substr($product['description'], 0, 50)) ?? '') ?>
+                        <?= substr($product['description'], 0, 100) ?? '' ?>
                     </td>
                     <td class="px-6 py-4">
                         <?php if ($product['visibility'] == 1) : ?>
