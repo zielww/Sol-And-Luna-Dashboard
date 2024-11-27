@@ -72,11 +72,15 @@
                         <label for="select-tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories<span
                                     class="text-red-500">*</span></label>
                         <select id="select-tags" multiple>
-                            <optgroup label="Men" >
-                                <?php foreach ($categories as $category) : ?>
-                                    <option value="<?= ucfirst($category['name']) ?>" data-date="1997"><?= ucfirst($category['name']) ?></option>
-                                <?php endforeach; ?>
-                            </optgroup>
+                            <?php foreach ($main_categories as $main_category) : ?>
+                                <optgroup label="<?= htmlspecialchars(ucfirst($main_category['name'] ?? '')) ?>">
+                                    <?php foreach ($categories as $category) : ?>
+                                        <?php if ($category['parent_category_id'] == $main_category['category_id']) : ?>
+                                            <option value="<?= ucfirst($category['name']) ?>"><?= ucfirst($category['name']) ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
                         </select>
                         <label>
                             <input type="hidden" name="category" id="category">
@@ -107,7 +111,7 @@
                         <input type="file" id="images" name="images[]" accept="image/*" multiple class="block w-full
                         text-sm
                         text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can upload up to 4 images.</p>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You can upload up to 4 images. 2mb max. (JPG, PNG, GIF, WEBP)</p>
                     </div>
                 </div>
                 <button type="submit"
