@@ -5,6 +5,7 @@ namespace Core\Repository;
 use Core\App;
 use Core\Database;
 use Core\Session;
+use CURLFile;
 
 class Products
 {
@@ -143,10 +144,38 @@ class Products
             }
 
             $image_id = generateUniqueId();
-            $target_path = $this->move_uploaded_file($upload_directory, $image_tmp_names[$index], $image_id .
-            $image_name);
-            $this->save_image_to_database($product_id, $image_id . $image_name, $target_path, $index === 0);
+            $image_name = $image_id . $image_name;
+            $target_path = $this->move_uploaded_file($upload_directory, $image_tmp_names[$index], $image_name);
+            $cloud_path = $this->upload_to_cloud($image_name);
+            $this->save_image_to_database($product_id, $image_name, $target_path, $cloud_path, $index === 0);
         }
+    }
+
+    private function upload_to_cloud($image_name): string
+    {
+        $api_key = $_ENV['IMGBB_API_KEY'];
+        $url = 'https://api.imgbb.com/1/upload';
+        $file_path = base_path('/public/uploads/') . $image_name;
+
+        $ch = curl_init();
+
+        $file_data = [
+            'key' => $api_key,
+            'image' => base64_encode(file_get_contents($file_path))
+        ];
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $file_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        $response_data = json_decode($response, true);
+
+        return $response_data['data']['url'];
     }
 
     private function remove_old_images(int $product_id): void
@@ -160,13 +189,14 @@ class Products
         $this->db->query("DELETE FROM product_images WHERE product_id = :product_id", ['product_id' => $product_id]);
     }
 
-    private function save_image_to_database(int $product_id, string $image_name, string $image_path, bool $is_primary): void
+    private function save_image_to_database(int $product_id, string $image_name, string $image_path, string $cloud_url, bool $is_primary): void
     {
-        $this->db->query("INSERT INTO product_images (product_id, name, image_url, is_primary) 
-            VALUES (:product_id, :name, :image_url, :is_primary)", [
+        $this->db->query("INSERT INTO product_images (product_id, name, image_url, cloud_url, is_primary) 
+            VALUES (:product_id, :name, :image_url, :cloud_url, :is_primary)", [
             'product_id' => $product_id,
             'name' => $image_name,
             'image_url' => $image_path,
+            'cloud_url' => $cloud_url,
             'is_primary' => $is_primary ? 1 : 0,
         ]);
     }

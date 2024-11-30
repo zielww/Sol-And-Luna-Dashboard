@@ -96,16 +96,45 @@ class Customers
         $upload_directory = $this->get_upload_directory();
         $target_path = $this->move_uploaded_file($upload_directory, $_FILES['image']['tmp_name'], $image_id .
             $_FILES['image']['name']);
-        $this->save_image_to_database($customer_id, $image_id . $_FILES['image']['name'], $target_path);
+        $cloud_path = $this->upload_to_cloud($image_id . $_FILES['image']['name']);
+        $this->save_image_to_database($customer_id, $image_id . $_FILES['image']['name'], $cloud_path, $target_path);
     }
 
-    private function save_image_to_database(int $user_id, string $image_name, string $image_path): void
+    private function upload_to_cloud($image_name): string
     {
-        $this->db->query("INSERT INTO user_images (user_id, image_url, name) 
-            VALUES (:user_id, :image_url, :name)", [
+        $api_key = $_ENV['IMGBB_API_KEY'];
+        $url = 'https://api.imgbb.com/1/upload';
+        $file_path = base_path('/public/uploads/') . $image_name;
+
+        $ch = curl_init();
+
+        $file_data = [
+            'key' => $api_key,
+            'image' => base64_encode(file_get_contents($file_path))
+        ];
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $file_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        $response_data = json_decode($response, true);
+
+        return $response_data['data']['url'];
+    }
+
+    private function save_image_to_database(int $user_id, string $image_name, string $cloud_path, string $image_path): void
+    {
+        $this->db->query("INSERT INTO user_images (user_id, image_url, cloud_url, name) 
+            VALUES (:user_id, :image_url, :cloud_url, :name)", [
             'user_id' => $user_id,
             'name' => $image_name,
             'image_url' => $image_path,
+            'cloud_url' => $cloud_path,
         ]);
     }
 
