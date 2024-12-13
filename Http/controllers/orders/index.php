@@ -6,6 +6,7 @@ use Core\Database;
 $db = App::resolve(Database::class);
 
 $status = match ($_GET['sort'] ?? false) {
+    "pending" => 'pending',
     "new" => 'new',
     "processing" => 'processing',
     "shipped" => 'shipped',

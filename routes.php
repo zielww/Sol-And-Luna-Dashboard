@@ -24,6 +24,7 @@ $router->patch('/products', 'products/update.php')->only('admin');
 $router->get('/order', 'orders/show.php')->only('admin')->params('orders');;
 $router->get('/orders', 'orders/index.php')->only('admin');
 $router->patch('/orders', 'orders/update.php')->only('admin');
+$router->delete('/orders', 'orders/delete.php')->only('admin');
 
 //Categories
 $router->get('/category', 'categories/edit.php')->only('admin')->params('categories');

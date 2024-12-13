@@ -20,6 +20,10 @@ $products = $db->query("
 
 $product = current(array_filter($products, fn($product) => $product['product_id'] == $_GET['id']));
 
+if (!$product) {
+    redirect('/products');
+}
+
 $product_categories = $db->query("
     SELECT c.name 
     FROM categories c 

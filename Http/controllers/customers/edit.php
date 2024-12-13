@@ -8,6 +8,10 @@ $db = App::resolve(Database::class);
 
 $customer = $db->query("select * from users where user_id = :user_id", ['user_id' => $_GET['id']])->find();
 
+if (!$customer) {
+    redirect('/customers');
+}
+
 $addresses = $db->query("select * from addresses where user_id = :user_id", ['user_id' => $_GET['id']])->get() ?? [];
 
 $default_address = array_filter($addresses, fn($address) => $address['is_default'] == 1) ?? [];
