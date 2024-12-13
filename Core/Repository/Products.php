@@ -93,12 +93,16 @@ class Products
     private function update_product(array $attributes, array $categories): void
     {
         $this->db->query("UPDATE products SET name = :name, description = :description, visibility = :visibility,
-            price = :price, stock_quantity = :stock_quantity WHERE product_id = :product_id", [
+            price = :price, small_quantity = :small_quantity, medium_quantity = :medium_quantity, large_quantity = :large_quantity, xl_quantity = :xl_quantity, xxl_quantity = :xxl_quantity WHERE product_id = :product_id", [
             'name' => $attributes['name'],
             'description' => $attributes['description'],
             'visibility' => $attributes['visibility'] === 'true' ? 1 : 0,
             'price' => floatval($attributes['price']),
-            'stock_quantity' => (int)$attributes['quantity'],
+            'small_quantity' => (int)$attributes['small_quantity'],
+            'medium_quantity' => (int)$attributes['medium_quantity'],
+            'large_quantity' => (int)$attributes['large_quantity'],
+            'xl_quantity' => (int)$attributes['xl_quantity'],
+            'xxl_quantity' => (int)$attributes['xxl_quantity'],
             'product_id' => $attributes['product_id'],
         ]);
 
