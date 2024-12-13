@@ -667,6 +667,14 @@ video {
   grid-column: span 3 / span 3;
 }
 
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -1153,6 +1161,10 @@ video {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-rows-2 {
@@ -2779,6 +2791,10 @@ video {
 
   .sm\:col-span-3 {
     grid-column: span 3 / span 3;
+  }
+
+  .sm\:col-span-5 {
+    grid-column: span 5 / span 5;
   }
 
   .sm\:mx-4 {

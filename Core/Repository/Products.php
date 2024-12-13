@@ -65,13 +65,17 @@ class Products
 
     private function insert_product(array $attributes, array $categories): int
     {
-        $this->db->query("INSERT INTO products (name, description, visibility, price, stock_quantity) 
-            VALUES (:name, :description, :visibility, :price, :stock_quantity)", [
+        $this->db->query("INSERT INTO products (name, description, visibility, price, small_quantity, medium_quantity, large_quantity, xl_quantity, xxl_quantity) 
+            VALUES (:name, :description, :visibility, :price, :small_quantity, :medium_quantity, :large_quantity, :xl_quantity, :xxl_quantity)", [
             'name' => $attributes['name'],
             'description' => $attributes['description'],
             'visibility' => $attributes['visibility'] === 'true' ? 1 : 0,
             'price' => floatval($attributes['price']),
-            'stock_quantity' => (int)$attributes['quantity'],
+            'small_quantity' => (int)$attributes['small_quantity'],
+            'medium_quantity' => (int)$attributes['medium_quantity'],
+            'large_quantity' => (int)$attributes['large_quantity'],
+            'xl_quantity' => (int)$attributes['xl_quantity'],
+            'xxl_quantity' => (int)$attributes['xxl_quantity'],
         ]);
 
         $product = $this->db->query("SELECT * FROM products ORDER BY product_id DESC LIMIT 1")->find();

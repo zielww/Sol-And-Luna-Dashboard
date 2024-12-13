@@ -91,7 +91,51 @@ require base_path("Http/views/partials/main.php");
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <div class="flex items-center">
-                        Quantity
+                        Small Qty.
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Medium Qty.
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Large Qty.
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        XL Qty.
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        XXL Qty.
                         <div>
                             <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 24 24">
@@ -150,7 +194,7 @@ require base_path("Http/views/partials/main.php");
                         <?= htmlspecialchars($product['name']) ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= substr(trim(strip_tags($product['description'])), 0, 80) ?? '' ?>...
+                        <?= substr(trim(strip_tags($product['description'])), 0, 20) ?? '' ?>...
                     </td>
                     <td class="px-6 py-4">
                         <?php if ($product['visibility'] == 1) : ?>
@@ -169,8 +213,20 @@ require base_path("Http/views/partials/main.php");
                             </svg>
                         <?php endif; ?>
                     </td>
-                    <td class="px-6 py-4">
-                        <?= htmlspecialchars($product['stock_quantity']) ?>
+                    <td class="px-6 py-4 <?= intval($product['small_quantity']) <= 0 ? 'text-red-500' : '' ?>">
+                        <?= htmlspecialchars($product['small_quantity']) ?>
+                    </td>
+                    <td class="px-6 py-4 <?= intval($product['medium_quantity']) <= 0 ? 'text-red-500' : '' ?> ">
+                        <?= htmlspecialchars($product['medium_quantity']) ?>
+                    </td>
+                    <td class="px-6 py-4 <?= intval($product['large_quantity']) <= 0 ? 'text-red-500' : '' ?>">
+                        <?= htmlspecialchars($product['large_quantity']) ?>
+                    </td>
+                    <td class="px-6 py-4 <?= intval($product['xl_quantity']) <= 0 ? 'text-red-500' : '' ?>">
+                        <?= htmlspecialchars($product['xl_quantity']) ?>
+                    </td>
+                    <td class="px-6 py-4 <?= intval($product['xxl_quantity']) <= 0 ? 'text-red-500' : '' ?>">
+                        <?= htmlspecialchars($product['xxl_quantity']) ?>
                     </td>
                     <td class="px-6 py-4">
                         <?php
