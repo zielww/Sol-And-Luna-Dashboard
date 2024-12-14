@@ -1,3 +1,15 @@
+const sortedSales = [...sales].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+// Get the sorted order dates
+const orderDates = sortedSales.map(sale => new Date(sale.created_at).toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric'
+}));
+
+// Get the sales data (total_amount) for each sorted sale
+const salesData = sortedSales.map(sale => parseFloat(sale.total_amount));
+
 const options = {
     chart: {
         height: 350,
@@ -5,20 +17,20 @@ const options = {
         type: "line",
         fontFamily: "Inter, sans-serif",
         dropShadow: {
-            enabled: false,
+            enabled: true,
         },
         toolbar: {
-            show: false,
+            show: true,
         },
     },
     tooltip: {
         enabled: true,
         x: {
-            show: false,
+            show: true,
         },
     },
     dataLabels: {
-        enabled: false,
+        enabled: true,
     },
     stroke: {
         width: 6,
@@ -34,24 +46,19 @@ const options = {
     },
     series: [
         {
-            name: "Clicks",
-            data: [6500, 6418, 6456, 6526, 6356, 6456],
+            name: "Sales",
+            data: salesData,
             color: "#1A56DB",
-        },
-        {
-            name: "CPC",
-            data: [6456, 6356, 6526, 6332, 6418, 6500],
-            color: "#7E3AF2",
         },
     ],
     legend: {
-        show: false
+        show: true
     },
     stroke: {
         curve: 'smooth'
     },
     xaxis: {
-        categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+        categories: orderDates,
         labels: {
             show: true,
             style: {
@@ -60,18 +67,18 @@ const options = {
             }
         },
         axisBorder: {
-            show: false,
+            show: true,
         },
         axisTicks: {
-            show: false,
+            show: true,
         },
     },
     yaxis: {
-        show: false,
+        show: true,
     },
-}
+};
 
-if (document.getElementById("line-chart") && typeof ApexCharts !== 'undefined') {
-    const chart = new ApexCharts(document.getElementById("line-chart"), options);
+if (document.getElementById("sales-report") && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(document.getElementById("sales-report"), options);
     chart.render();
 }

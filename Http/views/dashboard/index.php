@@ -100,93 +100,154 @@ require base_path("Http/views/partials/aside.php");
                 </div>
             </div>
             <div class="grid sm:grid-cols-3 gap-4 mb-4">
-                <div class="max-w-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex justify-between">
-                        <div>
-                            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32.4k</h5>
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Revenue</p>
-                        </div>
-                        <div
-                                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                            12%
-                            <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 10 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-                            </svg>
+                <!--        Sales Report-->
+                <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mb-4">
+                    <div class="flex justify-between mb-5">
+                        <div class="grid gap-4 grid-cols-2">
+                            <div>
+                                <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">
+                                    Total Sales
+                                    <svg data-popover-target="sales-info" data-popover-placement="bottom"
+                                         class="w-3 h-3 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <div data-popover id="sales-info" role="tooltip"
+                                         class="absolute z-[999] invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                                        <div class="p-3 space-y-2">
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Total Sales Overview</h3>
+                                            <p>This report provides insights into the total sales generated over time. Ideally, the chart should show a growing trend, as stagnating or declining sales indicate
+                                                potential issues with sales performance or market demand.</p>
+
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Calculation</h3>
+                                            <p>The total sales are calculated for each date bucket, aggregating all sales up to that point. This means that the sales for period n include all sales made in the
+                                                prior periods, plus the sales generated during period n.</p>
+                                        </div>
+                                        <div data-popper-arrow></div>
+                                    </div>
+                                </h5>
+                                <p class="text-gray-900 dark:text-white text-2xl leading-none font-bold">₱<?= number_format($total_sales ?? 0, 2) ?></p>
+                            </div>
                         </div>
                     </div>
-                    <div id="revenue-chart"></div>
+                    <div id="sales-report"></div>
                     <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
                         <div class="flex justify-between items-center pt-5">
                             <a
-                                    href="#"
+                                    href="/sales-report"
+                                    class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+                                Sales Report
+                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--        Product Report-->
+                <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mb-4">
+                    <div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3">
+                                <svg width="50px" height="50px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier"><title>product</title>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="icon" fill="#6b7280" transform="translate(64.000000, 34.346667)">
+                                                <path d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
+                                                      id="Combined-Shape"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="flex items-center leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1"><?= number_format($total_product_quantity_sold ?? 0) ?>
+                                    <svg data-popover-target="product-info" data-popover-placement="bottom"
+                                         class="w-3 h-3 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <div data-popover id="product-info" role="tooltip"
+                                         class="absolute z-[999] invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                                        <div class="p-3 space-y-2 font-medium">
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Product Quantity Sold Overview</h3>
+                                            <p>This report provides insights into the total quantity of products sold over time. Ideally, the chart should display an upward trend, as stagnating or declining
+                                                quantities sold could signal issues with product demand or sales performance.</p>
+
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Calculation</h3>
+                                            <p>The quantity of products sold is calculated for each date bucket by summing the units sold. This means that the quantity for period n includes all products sold
+                                                in prior periods, as well as the units sold during period n.</p>
+                                        </div>
+                                        <div data-popper-arrow></div>
+                                    </div>
+                                </h5>
+                                <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Total product quantity sold</p>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+
+                    <div id="product-report"></div>
+                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+                        <div class="flex justify-between items-center pt-5">
+                            <a
+                                    href="/product-report"
+                                    class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+                                Product Report
+                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--        Payment Report-->
+                <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mb-4">
+                    <div class="flex justify-between mb-5">
+                        <div class="grid gap-4 grid-cols-2">
+                            <div>
+                                <h5 class="inline-flex items-center text-gray-500 dark:text-gray-400 leading-none font-normal mb-2">
+                                    Successful Payments
+                                    <svg data-popover-target="payment-info" data-popover-placement="bottom"
+                                         class="w-3 h-3 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <div data-popover id="payment-info" role="tooltip"
+                                         class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                                        <div class="p-3 space-y-2">
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Successful Payments Overview</h3>
+                                            <p>This report helps track the cumulative growth of successful payments over time. Ideally, the chart should show a consistent upward trend, as stagnation or a
+                                                decline in payments could indicate issues with payment processing or customer conversion.</p>
+
+                                            <h3 class="font-semibold text-gray-900 dark:text-white">Calculation</h3>
+                                            <p>For each date bucket, the total number of successful payments is calculated. This includes all successful transactions up to that date, plus the successful
+                                                payments made during the current period.</p>
+                                        </div>
+                                        <div data-popper-arrow></div>
+                                    </div>
+                                </h5>
+                                <p class="text-gray-900 dark:text-white text-2xl leading-none font-bold"><?= number_format($payment_count ?? 0) ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="payment-report"></div>
+                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+                        <div class="flex justify-between items-center pt-5">
+                            <a
+                                    href="/payment-report"
                                     class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
                                 Payment Report
-                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="m1 9 4-4-4-4"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="max-w-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex justify-between">
-                        <div>
-                            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">121</h5>
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">New Customers</p>
-                        </div>
-                        <div
-                                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                            8%
-                            <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 10 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div id="customers-chart"></div>
-                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-                        <div class="flex justify-between items-center pt-5">
-                            <a
-                                    href="#"
-                                    class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-                                User Report
-                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="m1 9 4-4-4-4"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="max-w-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-                    <div class="flex justify-between">
-                        <div>
-                            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32</h5>
-                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">New Orders</p>
-                        </div>
-                        <div
-                                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                            18%
-                            <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 10 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div id="orders-chart"></div>
-                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-                        <div class="flex justify-between items-center pt-5">
-                            <a
-                                    href="#"
-                                    class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-                                Order Report
                                 <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -287,9 +348,11 @@ require base_path("Http/views/partials/aside.php");
                                     <g filter="url(#filter0_i_4_2732)">
                                         <rect width="82" height="24" rx="6" fill="#FBAAAA"/>
                                         <g clip-path="url(#clip0_4_2732)">
-                                            <path d="M25.9588 16V7.27273H29.0696C29.7486 7.27273 30.3111 7.39631 30.7571 7.64347C31.2031 7.89062 31.5369 8.22869 31.7585 8.65767C31.9801 9.08381 32.0909 9.56392 32.0909 10.098C32.0909 10.6349 31.9787 11.1179 31.7543 11.5469C31.5327 11.973 31.1974 12.3111 30.7486 12.5611C30.3026 12.8082 29.7415 12.9318 29.0653 12.9318H26.9261V11.8153H28.946C29.375 11.8153 29.723 11.7415 29.9901 11.5938C30.2571 11.4432 30.4531 11.2386 30.5781 10.9801C30.7031 10.7216 30.7656 10.4276 30.7656 10.098C30.7656 9.76847 30.7031 9.47585 30.5781 9.22017C30.4531 8.96449 30.2557 8.7642 29.9858 8.61932C29.7188 8.47443 29.3665 8.40199 28.929 8.40199H27.2756V16H25.9588ZM36.2713 16.1321C35.6264 16.1321 35.071 15.9943 34.6051 15.7188C34.142 15.4403 33.7841 15.0497 33.5312 14.5469C33.2812 14.0412 33.1562 13.4489 33.1562 12.7699C33.1562 12.0994 33.2812 11.5085 33.5312 10.9972C33.7841 10.4858 34.1364 10.0866 34.5881 9.79972C35.0426 9.51278 35.5739 9.36932 36.1818 9.36932C36.5511 9.36932 36.9091 9.4304 37.2557 9.55256C37.6023 9.67472 37.9134 9.86648 38.1889 10.1278C38.4645 10.3892 38.6818 10.7287 38.8409 11.1463C39 11.5611 39.0795 12.0653 39.0795 12.6591V13.1108H33.8764V12.1562H37.831C37.831 11.821 37.7628 11.5241 37.6264 11.2656C37.4901 11.0043 37.2983 10.7983 37.0511 10.6477C36.8068 10.4972 36.5199 10.4219 36.1903 10.4219C35.8324 10.4219 35.5199 10.5099 35.2528 10.6861C34.9886 10.8594 34.7841 11.0866 34.6392 11.3679C34.4972 11.6463 34.4261 11.9489 34.4261 12.2756V13.0213C34.4261 13.4588 34.5028 13.831 34.6562 14.1378C34.8125 14.4446 35.0298 14.679 35.3082 14.8409C35.5866 15 35.9119 15.0795 36.2841 15.0795C36.5256 15.0795 36.7457 15.0455 36.9446 14.9773C37.1435 14.9062 37.3153 14.8011 37.4602 14.6619C37.6051 14.5227 37.7159 14.3509 37.7926 14.1463L38.9986 14.3636C38.902 14.7187 38.7287 15.0298 38.4787 15.2969C38.2315 15.5611 37.9205 15.767 37.5455 15.9148C37.1733 16.0597 36.7486 16.1321 36.2713 16.1321ZM41.7674 12.1136V16H40.4933V9.45455H41.7163V10.5199H41.7972C41.9478 10.1733 42.1836 9.89489 42.5046 9.68466C42.8285 9.47443 43.2362 9.36932 43.7276 9.36932C44.1737 9.36932 44.5643 9.46307 44.8995 9.65057C45.2347 9.83523 45.4947 10.1108 45.6793 10.4773C45.864 10.8437 45.9563 11.2969 45.9563 11.8366V16H44.6822V11.9901C44.6822 11.5156 44.5586 11.1449 44.3114 10.8778C44.0643 10.608 43.7248 10.473 43.293 10.473C42.9975 10.473 42.7347 10.5369 42.5046 10.6648C42.2773 10.7926 42.0969 10.9801 41.9634 11.2273C41.8327 11.4716 41.7674 11.767 41.7674 12.1136ZM50.1154 16.1278C49.587 16.1278 49.1154 15.9929 48.7006 15.723C48.2887 15.4503 47.9648 15.0625 47.729 14.5597C47.4961 14.054 47.3796 13.4474 47.3796 12.7401C47.3796 12.0327 47.4975 11.4276 47.7333 10.9247C47.9719 10.4219 48.2987 10.0369 48.7134 9.76989C49.1282 9.50284 49.5984 9.36932 50.1239 9.36932C50.5302 9.36932 50.8569 9.4375 51.104 9.57386C51.354 9.70739 51.5472 9.86364 51.6836 10.0426C51.8228 10.2216 51.9308 10.3793 52.0075 10.5156H52.0842V7.27273H53.3583V16H52.114V14.9815H52.0075C51.9308 15.1207 51.82 15.2798 51.6751 15.4588C51.533 15.6378 51.337 15.794 51.087 15.9276C50.837 16.0611 50.5131 16.1278 50.1154 16.1278ZM50.3967 15.0412C50.7631 15.0412 51.0728 14.9446 51.3256 14.7514C51.5813 14.5554 51.7745 14.2841 51.9052 13.9375C52.0387 13.5909 52.1055 13.1875 52.1055 12.7273C52.1055 12.2727 52.0401 11.875 51.9094 11.5341C51.7788 11.1932 51.587 10.9276 51.3342 10.7372C51.0813 10.5469 50.7688 10.4517 50.3967 10.4517C50.0131 10.4517 49.6935 10.5511 49.4379 10.75C49.1822 10.9489 48.989 11.2202 48.8583 11.5639C48.7305 11.9077 48.6665 12.2955 48.6665 12.7273C48.6665 13.1648 48.7319 13.5582 48.8626 13.9077C48.9933 14.2571 49.1864 14.5341 49.4421 14.7386C49.7006 14.9403 50.0188 15.0412 50.3967 15.0412ZM55.1768 16V9.45455H56.451V16H55.1768ZM55.8203 8.4446C55.5987 8.4446 55.4084 8.37074 55.2493 8.22301C55.093 8.07244 55.0149 7.89347 55.0149 7.68608C55.0149 7.47585 55.093 7.29687 55.2493 7.14915C55.4084 6.99858 55.5987 6.9233 55.8203 6.9233C56.0419 6.9233 56.2308 6.99858 56.3871 7.14915C56.5462 7.29687 56.6257 7.47585 56.6257 7.68608C56.6257 7.89347 56.5462 8.07244 56.3871 8.22301C56.2308 8.37074 56.0419 8.4446 55.8203 8.4446ZM59.4393 12.1136V16H58.1651V9.45455H59.3881V10.5199H59.4691C59.6197 10.1733 59.8555 9.89489 60.1765 9.68466C60.5004 9.47443 60.908 9.36932 61.3995 9.36932C61.8455 9.36932 62.2362 9.46307 62.5714 9.65057C62.9066 9.83523 63.1665 10.1108 63.3512 10.4773C63.5359 10.8437 63.6282 11.2969 63.6282 11.8366V16H62.354V11.9901C62.354 11.5156 62.2305 11.1449 61.9833 10.8778C61.7362 10.608 61.3967 10.473 60.9648 10.473C60.6694 10.473 60.4066 10.5369 60.1765 10.6648C59.9492 10.7926 59.7688 10.9801 59.6353 11.2273C59.5046 11.4716 59.4393 11.767 59.4393 12.1136ZM68.0813 18.5909C67.5614 18.5909 67.114 18.5227 66.739 18.3864C66.3668 18.25 66.0629 18.0696 65.8271 17.8452C65.5913 17.6207 65.4151 17.375 65.2987 17.108L66.3938 16.6562C66.4705 16.7812 66.5728 16.9134 66.7006 17.0526C66.8313 17.1946 67.0075 17.3153 67.229 17.4148C67.4535 17.5142 67.7418 17.5639 68.0941 17.5639C68.5771 17.5639 68.9762 17.446 69.2915 17.2102C69.6069 16.9773 69.7646 16.6051 69.7646 16.0938V14.8068H69.6836C69.6069 14.946 69.4961 15.1009 69.3512 15.2713C69.2092 15.4418 69.0131 15.5895 68.7631 15.7145C68.5131 15.8395 68.1879 15.902 67.7873 15.902C67.2702 15.902 66.8043 15.7812 66.3896 15.5398C65.9776 15.2955 65.6509 14.9361 65.4094 14.4616C65.1708 13.9844 65.0515 13.3977 65.0515 12.7017C65.0515 12.0057 65.1694 11.4091 65.4052 10.9119C65.6438 10.4148 65.9705 10.0341 66.3853 9.76989C66.8001 9.50284 67.2702 9.36932 67.7958 9.36932C68.2021 9.36932 68.5302 9.4375 68.7802 9.57386C69.0302 9.70739 69.2248 9.86364 69.364 10.0426C69.506 10.2216 69.6154 10.3793 69.6921 10.5156H69.7859V9.45455H71.0344V16.1449C71.0344 16.7074 70.9038 17.169 70.6424 17.5298C70.381 17.8906 70.0273 18.1577 69.5813 18.331C69.1381 18.5043 68.6381 18.5909 68.0813 18.5909ZM68.0685 14.8452C68.435 14.8452 68.7447 14.7599 68.9975 14.5895C69.2532 14.4162 69.4464 14.169 69.5771 13.848C69.7106 13.5241 69.7773 13.1364 69.7773 12.6847C69.7773 12.2443 69.712 11.8565 69.5813 11.5213C69.4506 11.1861 69.2589 10.9247 69.006 10.7372C68.7532 10.5469 68.4407 10.4517 68.0685 10.4517C67.685 10.4517 67.3654 10.5511 67.1097 10.75C66.854 10.946 66.6609 11.2131 66.5302 11.5511C66.4023 11.8892 66.3384 12.267 66.3384 12.6847C66.3384 13.1136 66.4038 13.4901 66.5344 13.8139C66.6651 14.1378 66.8583 14.3906 67.114 14.5724C67.3725 14.7543 67.6907 14.8452 68.0685 14.8452Z" fill="#FF0000"/>
+                                            <path d="M25.9588 16V7.27273H29.0696C29.7486 7.27273 30.3111 7.39631 30.7571 7.64347C31.2031 7.89062 31.5369 8.22869 31.7585 8.65767C31.9801 9.08381 32.0909 9.56392 32.0909 10.098C32.0909 10.6349 31.9787 11.1179 31.7543 11.5469C31.5327 11.973 31.1974 12.3111 30.7486 12.5611C30.3026 12.8082 29.7415 12.9318 29.0653 12.9318H26.9261V11.8153H28.946C29.375 11.8153 29.723 11.7415 29.9901 11.5938C30.2571 11.4432 30.4531 11.2386 30.5781 10.9801C30.7031 10.7216 30.7656 10.4276 30.7656 10.098C30.7656 9.76847 30.7031 9.47585 30.5781 9.22017C30.4531 8.96449 30.2557 8.7642 29.9858 8.61932C29.7188 8.47443 29.3665 8.40199 28.929 8.40199H27.2756V16H25.9588ZM36.2713 16.1321C35.6264 16.1321 35.071 15.9943 34.6051 15.7188C34.142 15.4403 33.7841 15.0497 33.5312 14.5469C33.2812 14.0412 33.1562 13.4489 33.1562 12.7699C33.1562 12.0994 33.2812 11.5085 33.5312 10.9972C33.7841 10.4858 34.1364 10.0866 34.5881 9.79972C35.0426 9.51278 35.5739 9.36932 36.1818 9.36932C36.5511 9.36932 36.9091 9.4304 37.2557 9.55256C37.6023 9.67472 37.9134 9.86648 38.1889 10.1278C38.4645 10.3892 38.6818 10.7287 38.8409 11.1463C39 11.5611 39.0795 12.0653 39.0795 12.6591V13.1108H33.8764V12.1562H37.831C37.831 11.821 37.7628 11.5241 37.6264 11.2656C37.4901 11.0043 37.2983 10.7983 37.0511 10.6477C36.8068 10.4972 36.5199 10.4219 36.1903 10.4219C35.8324 10.4219 35.5199 10.5099 35.2528 10.6861C34.9886 10.8594 34.7841 11.0866 34.6392 11.3679C34.4972 11.6463 34.4261 11.9489 34.4261 12.2756V13.0213C34.4261 13.4588 34.5028 13.831 34.6562 14.1378C34.8125 14.4446 35.0298 14.679 35.3082 14.8409C35.5866 15 35.9119 15.0795 36.2841 15.0795C36.5256 15.0795 36.7457 15.0455 36.9446 14.9773C37.1435 14.9062 37.3153 14.8011 37.4602 14.6619C37.6051 14.5227 37.7159 14.3509 37.7926 14.1463L38.9986 14.3636C38.902 14.7187 38.7287 15.0298 38.4787 15.2969C38.2315 15.5611 37.9205 15.767 37.5455 15.9148C37.1733 16.0597 36.7486 16.1321 36.2713 16.1321ZM41.7674 12.1136V16H40.4933V9.45455H41.7163V10.5199H41.7972C41.9478 10.1733 42.1836 9.89489 42.5046 9.68466C42.8285 9.47443 43.2362 9.36932 43.7276 9.36932C44.1737 9.36932 44.5643 9.46307 44.8995 9.65057C45.2347 9.83523 45.4947 10.1108 45.6793 10.4773C45.864 10.8437 45.9563 11.2969 45.9563 11.8366V16H44.6822V11.9901C44.6822 11.5156 44.5586 11.1449 44.3114 10.8778C44.0643 10.608 43.7248 10.473 43.293 10.473C42.9975 10.473 42.7347 10.5369 42.5046 10.6648C42.2773 10.7926 42.0969 10.9801 41.9634 11.2273C41.8327 11.4716 41.7674 11.767 41.7674 12.1136ZM50.1154 16.1278C49.587 16.1278 49.1154 15.9929 48.7006 15.723C48.2887 15.4503 47.9648 15.0625 47.729 14.5597C47.4961 14.054 47.3796 13.4474 47.3796 12.7401C47.3796 12.0327 47.4975 11.4276 47.7333 10.9247C47.9719 10.4219 48.2987 10.0369 48.7134 9.76989C49.1282 9.50284 49.5984 9.36932 50.1239 9.36932C50.5302 9.36932 50.8569 9.4375 51.104 9.57386C51.354 9.70739 51.5472 9.86364 51.6836 10.0426C51.8228 10.2216 51.9308 10.3793 52.0075 10.5156H52.0842V7.27273H53.3583V16H52.114V14.9815H52.0075C51.9308 15.1207 51.82 15.2798 51.6751 15.4588C51.533 15.6378 51.337 15.794 51.087 15.9276C50.837 16.0611 50.5131 16.1278 50.1154 16.1278ZM50.3967 15.0412C50.7631 15.0412 51.0728 14.9446 51.3256 14.7514C51.5813 14.5554 51.7745 14.2841 51.9052 13.9375C52.0387 13.5909 52.1055 13.1875 52.1055 12.7273C52.1055 12.2727 52.0401 11.875 51.9094 11.5341C51.7788 11.1932 51.587 10.9276 51.3342 10.7372C51.0813 10.5469 50.7688 10.4517 50.3967 10.4517C50.0131 10.4517 49.6935 10.5511 49.4379 10.75C49.1822 10.9489 48.989 11.2202 48.8583 11.5639C48.7305 11.9077 48.6665 12.2955 48.6665 12.7273C48.6665 13.1648 48.7319 13.5582 48.8626 13.9077C48.9933 14.2571 49.1864 14.5341 49.4421 14.7386C49.7006 14.9403 50.0188 15.0412 50.3967 15.0412ZM55.1768 16V9.45455H56.451V16H55.1768ZM55.8203 8.4446C55.5987 8.4446 55.4084 8.37074 55.2493 8.22301C55.093 8.07244 55.0149 7.89347 55.0149 7.68608C55.0149 7.47585 55.093 7.29687 55.2493 7.14915C55.4084 6.99858 55.5987 6.9233 55.8203 6.9233C56.0419 6.9233 56.2308 6.99858 56.3871 7.14915C56.5462 7.29687 56.6257 7.47585 56.6257 7.68608C56.6257 7.89347 56.5462 8.07244 56.3871 8.22301C56.2308 8.37074 56.0419 8.4446 55.8203 8.4446ZM59.4393 12.1136V16H58.1651V9.45455H59.3881V10.5199H59.4691C59.6197 10.1733 59.8555 9.89489 60.1765 9.68466C60.5004 9.47443 60.908 9.36932 61.3995 9.36932C61.8455 9.36932 62.2362 9.46307 62.5714 9.65057C62.9066 9.83523 63.1665 10.1108 63.3512 10.4773C63.5359 10.8437 63.6282 11.2969 63.6282 11.8366V16H62.354V11.9901C62.354 11.5156 62.2305 11.1449 61.9833 10.8778C61.7362 10.608 61.3967 10.473 60.9648 10.473C60.6694 10.473 60.4066 10.5369 60.1765 10.6648C59.9492 10.7926 59.7688 10.9801 59.6353 11.2273C59.5046 11.4716 59.4393 11.767 59.4393 12.1136ZM68.0813 18.5909C67.5614 18.5909 67.114 18.5227 66.739 18.3864C66.3668 18.25 66.0629 18.0696 65.8271 17.8452C65.5913 17.6207 65.4151 17.375 65.2987 17.108L66.3938 16.6562C66.4705 16.7812 66.5728 16.9134 66.7006 17.0526C66.8313 17.1946 67.0075 17.3153 67.229 17.4148C67.4535 17.5142 67.7418 17.5639 68.0941 17.5639C68.5771 17.5639 68.9762 17.446 69.2915 17.2102C69.6069 16.9773 69.7646 16.6051 69.7646 16.0938V14.8068H69.6836C69.6069 14.946 69.4961 15.1009 69.3512 15.2713C69.2092 15.4418 69.0131 15.5895 68.7631 15.7145C68.5131 15.8395 68.1879 15.902 67.7873 15.902C67.2702 15.902 66.8043 15.7812 66.3896 15.5398C65.9776 15.2955 65.6509 14.9361 65.4094 14.4616C65.1708 13.9844 65.0515 13.3977 65.0515 12.7017C65.0515 12.0057 65.1694 11.4091 65.4052 10.9119C65.6438 10.4148 65.9705 10.0341 66.3853 9.76989C66.8001 9.50284 67.2702 9.36932 67.7958 9.36932C68.2021 9.36932 68.5302 9.4375 68.7802 9.57386C69.0302 9.70739 69.2248 9.86364 69.364 10.0426C69.506 10.2216 69.6154 10.3793 69.6921 10.5156H69.7859V9.45455H71.0344V16.1449C71.0344 16.7074 70.9038 17.169 70.6424 17.5298C70.381 17.8906 70.0273 18.1577 69.5813 18.331C69.1381 18.5043 68.6381 18.5909 68.0813 18.5909ZM68.0685 14.8452C68.435 14.8452 68.7447 14.7599 68.9975 14.5895C69.2532 14.4162 69.4464 14.169 69.5771 13.848C69.7106 13.5241 69.7773 13.1364 69.7773 12.6847C69.7773 12.2443 69.712 11.8565 69.5813 11.5213C69.4506 11.1861 69.2589 10.9247 69.006 10.7372C68.7532 10.5469 68.4407 10.4517 68.0685 10.4517C67.685 10.4517 67.3654 10.5511 67.1097 10.75C66.854 10.946 66.6609 11.2131 66.5302 11.5511C66.4023 11.8892 66.3384 12.267 66.3384 12.6847C66.3384 13.1136 66.4038 13.4901 66.5344 13.8139C66.6651 14.1378 66.8583 14.3906 67.114 14.5724C67.3725 14.7543 67.6907 14.8452 68.0685 14.8452Z"
+                                                  fill="#FF0000"/>
                                         </g>
-                                        <path d="M14.3319 6C11.211 6 8.68236 8.68733 8.68236 12C8.68236 15.3127 11.2127 18 14.3319 18C17.4528 18 19.9814 15.3127 19.9814 12C19.9814 8.68733 17.451 6 14.3319 6ZM14.3319 16.6691C11.908 16.6691 9.93723 14.5761 9.93723 12.0018C9.93723 9.42753 11.908 7.33455 14.3319 7.33455C16.7558 7.33455 18.7265 9.42753 18.7265 12.0018C18.7265 14.5761 16.7541 16.6691 14.3319 16.6691Z" fill="#FF1E00"/>
+                                        <path d="M14.3319 6C11.211 6 8.68236 8.68733 8.68236 12C8.68236 15.3127 11.2127 18 14.3319 18C17.4528 18 19.9814 15.3127 19.9814 12C19.9814 8.68733 17.451 6 14.3319 6ZM14.3319 16.6691C11.908 16.6691 9.93723 14.5761 9.93723 12.0018C9.93723 9.42753 11.908 7.33455 14.3319 7.33455C16.7558 7.33455 18.7265 9.42753 18.7265 12.0018C18.7265 14.5761 16.7541 16.6691 14.3319 16.6691Z"
+                                              fill="#FF1E00"/>
                                         <path d="M14.9619 9.33057H13.7053V12.2731L15.7739 14.47L16.6614 13.5275L14.9619 11.7225V9.33057Z" fill="#FF1E00"/>
                                     </g>
                                     <defs>
@@ -481,6 +544,16 @@ require base_path("Http/views/partials/aside.php");
             </table>
         </div>
     </div>
+    <script>
+        // Add the options
+        const sales = <?= $sales_report_json ?>;
+        const payments = <?= $payment_report_json ?>;
+        const products = <?= $product_report_json ?>;
+    </script>
+
+    <script src="/public/scripts/charts/salesReport.js" type="module"></script>
+    <script src="/public/scripts/charts/productReport.js" type="module"></script>
+    <script src="/public/scripts/charts/paymentReport.js" type="module"></script>
 <?php
 require base_path("Http/views/partials/footer.php");
 ?>
