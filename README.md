@@ -1,13 +1,13 @@
-<h1 align="center">Welcome to Sol-And-Luna-Dashboard 👋</h1>
+<h1 align="center">Welcome to Sol-And-Luna-Dashboard ✨</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
   <a href="help.solapparel.live" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="#" target="_blank">
+  <a href="https://github.com/zielww/Sol-And-Luna-Dashboard/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://twitter.com/zielww" target="_blank">
+  <a href="https://twitter.com" target="_blank">
     <img alt="Twitter: zielww" src="https://img.shields.io/twitter/follow/zielww.svg?style=social" />
   </a>
 </p>
@@ -65,4 +65,4 @@ Add an .env file
 Give a ⭐️ if this project helped you!
 
 ## License
-[MIT](https://github.com/zielww/Sol-And-Luna-Dashboard/LICENSE)
+[MIT](https://github.com/zielww/Sol-And-Luna-Dashboard/blob/main/LICENSE)
