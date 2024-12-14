@@ -110,4 +110,24 @@ class Reports
 
         return $this->db->query($query, $params)->get();
     }
+
+    public function get_payment(string $start = null, string $end = null) : array
+    {
+        $query = "select * from orders where payment_status = :status";
+        $params = [':status' => 'paid'];
+
+        if ($start && $end) {
+            $startParts = explode('/', $start);
+            $startFormatted = $startParts[2] . '-' . $startParts[0] . '-' . $startParts[1] . ' 00:00:00';
+
+            $endParts = explode('/', $end);
+            $endFormatted = $endParts[2] . '-' . $endParts[0] . '-' . $endParts[1] . ' 23:59:59';
+
+            $query .= " and created_at between :start and :end";
+            $params[':start'] = $startFormatted;
+            $params[':end'] = $endFormatted;
+        }
+
+        return $this->db->query($query, $params)->get();
+    }
 }

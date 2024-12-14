@@ -34,11 +34,11 @@ function authorize($condition, $status = Response::FORBIDDEN): void
     }
 }
 
-function url_is($url, $extra_url = null, $extra_extra_url = null): bool
+function url_is($url, $extra_url = null, $extra_extra_url = null, $extra_extra_extra_url = null, $extra_extra_extra_extra_url = null): bool
 {
     return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $url || parse_url($_SERVER['REQUEST_URI'],
-            PHP_URL_PATH) === $extra_url || parse_url($_SERVER['REQUEST_URI'],
-            PHP_URL_PATH) === $extra_extra_url;
+            PHP_URL_PATH) === $extra_url || parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $extra_extra_url
+        || parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $extra_extra_extra_url || parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $extra_extra_extra_extra_url;
 }
 
 function url($url): bool
@@ -77,7 +77,7 @@ function order_status(array $order, string $status): bool
     return strtolower($order['status']) === $status;
 }
 
-function previous_url() : string
+function previous_url(): string
 {
     $prev = parse_url($_SERVER['HTTP_REFERER']);
     return $prev['path'] . '?' . $prev['query'];
