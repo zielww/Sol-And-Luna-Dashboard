@@ -16,10 +16,8 @@ $status = match ($_GET['sort'] ?? false) {
 };
 
 $query = "
-    SELECT order_items.*, products.*, orders.created_at, orders.status, orders.email
-    FROM order_items
-    JOIN products ON order_items.product_id = products.product_id
-    JOIN orders ON order_items.order_id = orders.order_id
+    SELECT *
+    FROM orders
 ";
 
 if ($status) {
@@ -32,7 +30,7 @@ $open_orders = array_filter($orders, function ($order) {
 });
 
 $total_price = array_reduce($orders, function ($carry, $item) {
-    return $carry + ($item['quantity'] * floatval($item['price']));
+    return $carry + floatval($item['total_amount']);
 }, 0);
 
 require base_path('Http/views/orders/index.php');

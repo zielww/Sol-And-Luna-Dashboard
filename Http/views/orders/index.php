@@ -25,7 +25,7 @@ require base_path("Http/views/partials/main.php");
 
         <div class="block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-sm tracking-tight text-gray-600 dark:text-white">Open orders</h5>
-            <p class="text-gray-900 dark:text-gray-900 font-bold text-5xl"><?= count($open_orders) ?? 0 ?></p>
+            <p class="text-gray-900 dark:text-gray-900 font-bold text-5xl"><?= count($open_orders ?? []) ?></p>
         </div>
 
         <div class="block max-w-full overflow-x-auto p-6 bg-white border border-gray-200 rounded-lg shadow
@@ -115,28 +115,6 @@ require base_path("Http/views/partials/main.php");
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <div class="flex items-center">
-                        Name
-                        <div>
-                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Description
-                        <div>
-                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
                         Status
                         <div>
                             <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +126,29 @@ require base_path("Http/views/partials/main.php");
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <div class="flex items-center">
-                        Quantity
+                        Notes
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Payment Method
+                        <div>
+                            <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
+                        Tracking Number
                         <div>
                             <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 24 24">
@@ -182,12 +182,6 @@ require base_path("Http/views/partials/main.php");
                     </th>
                     <td class="px-6 py-4">
                         <?= htmlspecialchars($order['email']) ?>
-                    </td>
-                    <td class="px-6 py-4">
-                        <?= htmlspecialchars($order['name']) ?>
-                    </td>
-                    <td class="px-6 py-4">
-                        <?= htmlspecialchars(substr(trim(strip_tags($order['description'])), 0, 30)) ?>...
                     </td>
                     <td class="px-6 py-4">
                         <?php if (strtolower($order['status']) === 'new') : ?>
@@ -401,13 +395,16 @@ require base_path("Http/views/partials/main.php");
                         <?php endif; ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= htmlspecialchars($order['quantity']) ?>
+                        <?= htmlspecialchars($order['notes']) ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?php
-                        $total_price = calculateTotalPrice($order['price'], $order['quantity']);
-                        echo htmlspecialchars("₱" . number_format($total_price, 2));
-                        ?>
+                        <?= htmlspecialchars($order['payment']) ?>
+                    </td>
+                    <td class="px-6 py-4">
+                        <?= htmlspecialchars($order['tracking_number']) ?>
+                    </td>
+                    <td class="px-6 py-4">
+                        <?= '₱' . htmlspecialchars(number_format($order['total_amount'] ?? 0, 2)) ?>
                     </td>
                     <td class="px-6 py-4">
                         <a href="/order?id=<?= htmlspecialchars($order['order_id']) ?>" class="font-medium
