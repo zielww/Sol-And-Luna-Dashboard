@@ -10,7 +10,7 @@ $users = $db->query("
     SELECT users.*, user_images.name 
     FROM users 
     LEFT JOIN user_images ON users.user_id = user_images.user_id 
-    WHERE users.email != :email
+    WHERE users.email != :email AND user_type = 'admin'
     ORDER BY created_at ASC
 ", [
     'email' => $admin['email']
