@@ -48,6 +48,13 @@ $router->delete('/addresses', 'customers/addresses/destroy.php')->only('admin');
 
 //Reports
 $router->get('/reports', 'reports/index.php')->only('admin');
+$router->get('/sales-report', 'reports/sales-report.php')->only('admin');
+$router->get('/product-report', 'reports/product-report.php')->only('admin');
+$router->get('/payment-report', 'reports/payment-report.php')->only('admin');
+$router->get('/delivery-report', 'reports/delivery-report.php')->only('admin');
+
+//Pdfs
+$router->get('/sales-pdf', 'reports/pdfs/sales-pdf.php')->only('admin');
 
 //Messages
 $router->get('/messages', 'messages/index.php')->only('admin');

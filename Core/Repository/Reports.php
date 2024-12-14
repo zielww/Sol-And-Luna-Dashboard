@@ -90,4 +90,24 @@ class Reports
             WHERE status = :status
         ", [':status' => 'delivered'])->get();
     }
+
+    public function get_sales(string $start = null, string $end = null) : array
+    {
+        $query = "select o.*, od.created_at, od.status, od.email, od.payment, od.total_amount, p.name from order_items o join orders od on o.order_id = od.order_id join products p on p.product_id = o.product_id where od.payment_status = :status";
+        $params = [':status' => 'paid'];
+
+        if ($start && $end) {
+            $startParts = explode('/', $start);
+            $startFormatted = $startParts[2] . '-' . $startParts[0] . '-' . $startParts[1] . ' 00:00:00';
+
+            $endParts = explode('/', $end);
+            $endFormatted = $endParts[2] . '-' . $endParts[0] . '-' . $endParts[1] . ' 23:59:59';
+
+            $query .= " and od.created_at between :start and :end";
+            $params[':start'] = $startFormatted;
+            $params[':end'] = $endFormatted;
+        }
+
+        return $this->db->query($query, $params)->get();
+    }
 }

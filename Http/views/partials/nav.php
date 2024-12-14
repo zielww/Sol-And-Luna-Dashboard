@@ -69,31 +69,9 @@ $current_user = $db->query('select * from user_images where user_id = :user_id',
                 </a>
             </div>
             <div class="flex items-center ml-2">
-                <form class="max-w-md mx-auto">
-                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div class="relative flex justify-between">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </div>
-                        <input type="search" id="default-search" class="block w-full p-2 ps-10 text-sm
-                            text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500
-                            focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search"/>
-                    </div>
-                </form>
-
-                <div class="flex ms-3 hover:cursor-pointer ">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400
-                        group-hover:text-gray-900 dark:group-hover:text-white" viewBox="0 0 24 24"
-                         fill="currentColor">
-                        <path d="M22
-                    20H2V18H3V11.0314C3 6.04348 7.02944 2 12 2C16.9706 2 21 6.04348 21 11.0314V18H22V20ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path>
-                    </svg>
-                </div>
+                <p class="text-sm text-neutral-800 dark:text-white" role="none">
+                   Welcome <span class="font-semibold"><?= $admin['first_name'] . ' ' . $admin['last_name'] ?? '' ?></span>
+                </p>
 
                 <div x-data="{open:false}" class="relative flex items-center ms-3">
                     <div>
@@ -118,11 +96,6 @@ $current_user = $db->query('select * from user_images where user_id = :user_id',
                                 <a href="/dashboard"
                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                    role="menuitem">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                   role="menuitem">Settings</a>
                             </li>
                             <form action="/logout" method="POST" class="w-full">
                                 <input type="hidden" name="_method" value="DELETE">
