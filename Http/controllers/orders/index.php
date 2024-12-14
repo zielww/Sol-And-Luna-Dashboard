@@ -25,7 +25,6 @@ $query = "
 if ($status) {
     $query .= " WHERE orders.status = '$status'";
 }
-
 $orders = $db->query($query)->get();
 
 $open_orders = array_filter($orders, function ($order) {

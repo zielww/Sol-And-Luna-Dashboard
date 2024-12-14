@@ -88,7 +88,7 @@ require base_path("Http/views/partials/main.php");
                 dark:text-white font-semibold">Payment Status<span class="text-red-500">*</span></label>
                 <input type="text" id="payment_status" name="payment_status" readonly
                        value="<?= htmlspecialchars(ucfirst($order['payment_status']) ?? '') ?>"
-                       class="<?= $order['payment_status'] == 'not paid' ? 'bg-red-400' : '' ?> border border-gray-300 text-gray-900 text-sm rounded-lg
+                       class="<?= $order['payment_status'] == 'not paid' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-900' ?> border border-gray-300 text-gray-900 text-sm rounded-lg
                        focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
@@ -98,7 +98,7 @@ require base_path("Http/views/partials/main.php");
                 dark:text-white font-semibold">Status<span class="text-red-500">*</span><span class="text-gray-500
                 text-xs sm:text-sm">
                         note: change status manually</span></label>
-                    <input id="status" type="hidden" readonly name="status" value="<?= 'pending' ?>">
+                    <input id="status" type="hidden" readonly name="status" value="<?= $order['status'] ?>">
                     <div id="status_container" class="flex flex-wrap sm:flex gap-2">
                         <div data-status="new"
                              class="status_indicator <?= order_status($order, 'new') ? 'status_selected' : 'status_not_selected'
