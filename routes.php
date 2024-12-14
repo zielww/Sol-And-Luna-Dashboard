@@ -57,6 +57,7 @@ $router->get('/delivery-report', 'reports/delivery-report.php')->only('admin');
 $router->get('/sales-pdf', 'reports/pdfs/sales-pdf.php')->only('admin');
 $router->get('/payment-pdf', 'reports/pdfs/payment-pdf.php')->only('admin');
 $router->get('/delivery-pdf', 'reports/pdfs/delivery-pdf.php')->only('admin');
+$router->get('/product-pdf', 'reports/pdfs/product-pdf.php')->only('admin');
 
 //Messages
 $router->get('/messages', 'messages/index.php')->only('admin');

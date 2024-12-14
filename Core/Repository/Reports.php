@@ -150,4 +150,24 @@ class Reports
 
         return $this->db->query($query, $params)->get();
     }
+
+    public function get_products(string $start = null, string $end = null) : array
+    {
+        $query = "select * from products";
+        $params = [];
+
+        if ($start && $end) {
+            $startParts = explode('/', $start);
+            $startFormatted = $startParts[2] . '-' . $startParts[0] . '-' . $startParts[1] . ' 00:00:00';
+
+            $endParts = explode('/', $end);
+            $endFormatted = $endParts[2] . '-' . $endParts[0] . '-' . $endParts[1] . ' 23:59:59';
+
+            $query .= " where created_at between :start and :end";
+            $params[':start'] = $startFormatted;
+            $params[':end'] = $endFormatted;
+        }
+
+        return $this->db->query($query, $params)->get();
+    }
 }
